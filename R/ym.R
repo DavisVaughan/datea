@@ -1,7 +1,6 @@
 #' @export
 ym <- function(x = integer()) {
   x <- vec_cast(x, integer())
-  size <- length(x)
 
   out <- months_to_days(x)
 
