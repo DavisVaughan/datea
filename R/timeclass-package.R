@@ -6,5 +6,6 @@
 ## usethis namespace: start
 #' @import vctrs
 #' @import rlang
+#' @useDynLib timeclass, .registration = TRUE
 ## usethis namespace: end
 NULL

@@ -12,8 +12,7 @@ ym <- function(x = integer()) {
     return(new_ym(NA_real_))
   }
 
-  out <- origin + months(x)
-  out <- unclass(out)
+  out <- months_to_days(x)
 
   new_ym(out)
 }
