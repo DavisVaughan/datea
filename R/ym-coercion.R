@@ -4,6 +4,12 @@ as_ym <- function(x, ...) {
 }
 
 #' @export
+as_ym.default <- function(x, ...) {
+  class <- class_collapse(x)
+  abort(paste0("Can't coerce a `", class, "` to a `ym`."))
+}
+
+#' @export
 as_ym.ym <- function(x, ...) {
   x
 }

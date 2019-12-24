@@ -15,3 +15,7 @@ vec_dim <- function(x) {
 is_one_dim <- function(x) {
   vec_dim(x) == 1L
 }
+
+class_collapse <- function(x) {
+  paste0(class(x), collapse = "/")
+}
