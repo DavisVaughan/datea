@@ -15,6 +15,13 @@ is_ym <- function(x) {
   inherits(x, "ym")
 }
 
+# We could leave this to `is.numeric.Date()` but I'd rather not
+
+#' @export
+is.numeric.ym <- function(x) {
+  FALSE
+}
+
 # ------------------------------------------------------------------------------
 
 # x = Number of days since 1970-01-01
