@@ -16,7 +16,7 @@ SEXP months_to_days(SEXP x) {
     int elt = p_x[i];
 
     if (elt == NA_INTEGER) {
-      p_out[i] = NA_INTEGER;
+      p_out[i] = NA_REAL;
       continue;
     }
 
