@@ -53,6 +53,22 @@ vec_cast.POSIXct.ym <- function(x, to, ...) {
 
 # ------------------------------------------------------------------------------
 
+#' @method vec_cast.ym POSIXlt
+#' @export
+vec_cast.ym.POSIXlt <- function(x, to, ...) {
+  months <- warp::warp_distance(x, by = "month")
+  ym(months)
+}
+
+#' @method vec_cast.POSIXlt ym
+#' @export
+vec_cast.POSIXlt.ym <- function(x, to, ...) {
+  x <- vec_cast(x, new_date())
+  vec_cast(x, to)
+}
+
+# ------------------------------------------------------------------------------
+
 #' @method vec_cast.ym double
 #' @export
 vec_cast.ym.double <- function(x, to, ...) {
