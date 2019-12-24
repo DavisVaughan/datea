@@ -30,6 +30,18 @@ ym_ym_minus <- function(x, y) {
 
 # ------------------------------------------------------------------------------
 
+#' @method vec_arith.ym MISSING
+#' @export
+vec_arith.ym.MISSING <- function(op, x, y, ...) {
+  switch(
+    op,
+    "+" = x,
+    stop_incompatible_op(op, x, y)
+  )
+}
+
+# ------------------------------------------------------------------------------
+
 #' @method vec_arith.ym numeric
 #' @export
 vec_arith.ym.numeric <- function(op, x, y, ...) {
