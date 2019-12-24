@@ -4,6 +4,11 @@
 
 static inline int months_to_days_impl(int months);
 
+/*
+ * Compute the number of days from `1970-01-01` given a number of months offset
+ * from that origin. The number of days correspond to the first of the month
+ * that `x` offsets to.
+ */
 SEXP months_to_days(SEXP x) {
   R_xlen_t size = Rf_xlength(x);
 
