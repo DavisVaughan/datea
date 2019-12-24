@@ -1,5 +1,5 @@
 #' @export
-format.yearmonth <- function(x, ...) {
+format.ym <- function(x, ...) {
   x_lt <- as.POSIXlt(x)
 
   year <- x_lt$year + 1900L
@@ -14,11 +14,11 @@ format.yearmonth <- function(x, ...) {
 }
 
 #' @export
-vec_ptype_abbr.yearmonth <- function(x, ...) {
-  "yrmnth"
+vec_ptype_abbr.ym <- function(x, ...) {
+  "ym"
 }
 
 #' @export
-vec_ptype_full.yearmonth <- function(x, ...) {
-  "yearmonth"
+vec_ptype_full.ym <- function(x, ...) {
+  "ym"
 }

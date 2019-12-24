@@ -17,51 +17,51 @@ NULL
 
 #' @export
 #' @rdname vctrs-compat
-#' @method vec_ptype2 yearmonth
-#' @export vec_ptype2.yearmonth
-vec_ptype2.yearmonth <- function(x, y, ...) {
-  UseMethod("vec_ptype2.yearmonth", y)
+#' @method vec_ptype2 ym
+#' @export vec_ptype2.ym
+vec_ptype2.ym <- function(x, y, ...) {
+  UseMethod("vec_ptype2.ym", y)
 }
 
-#' @method vec_ptype2.yearmonth default
+#' @method vec_ptype2.ym default
 #' @export
-vec_ptype2.yearmonth.default <- function(x, y, ..., x_arg = "x", y_arg = "y") {
+vec_ptype2.ym.default <- function(x, y, ..., x_arg = "x", y_arg = "y") {
   vec_default_ptype2(x, y, ..., x_arg = x_arg, y_arg = y_arg)
 }
 
 # ------------------------------------------------------------------------------
 
-#' @method vec_ptype2.yearmonth yearmonth
+#' @method vec_ptype2.ym ym
 #' @export
-vec_ptype2.yearmonth.yearmonth <- function(x, y, ..., x_arg = "x", y_arg = "y") {
-  new_yearmonth()
+vec_ptype2.ym.ym <- function(x, y, ..., x_arg = "x", y_arg = "y") {
+  new_ym()
 }
 
 # ------------------------------------------------------------------------------
 
-#' @method vec_ptype2.yearmonth Date
+#' @method vec_ptype2.ym Date
 #' @export
-vec_ptype2.yearmonth.Date <- function(x, y, ..., x_arg = "x", y_arg = "y") {
+vec_ptype2.ym.Date <- function(x, y, ..., x_arg = "x", y_arg = "y") {
   new_date()
 }
 
-#' @method vec_ptype2.Date yearmonth
+#' @method vec_ptype2.Date ym
 #' @export
-vec_ptype2.Date.yearmonth <- function(x, y, ..., x_arg = "x", y_arg = "y") {
+vec_ptype2.Date.ym <- function(x, y, ..., x_arg = "x", y_arg = "y") {
   new_date()
 }
 
 # ------------------------------------------------------------------------------
 
-#' @method vec_ptype2.yearmonth POSIXt
+#' @method vec_ptype2.ym POSIXt
 #' @export
-vec_ptype2.yearmonth.POSIXt <- function(x, y, ..., x_arg = "x", y_arg = "y") {
+vec_ptype2.ym.POSIXt <- function(x, y, ..., x_arg = "x", y_arg = "y") {
   new_datetime(tzone = tzone(y))
 }
 
-#' @method vec_ptype2.POSIXt yearmonth
+#' @method vec_ptype2.POSIXt ym
 #' @export
-vec_ptype2.POSIXt.yearmonth <- function(x, y, ..., x_arg = "x", y_arg = "y") {
+vec_ptype2.POSIXt.ym <- function(x, y, ..., x_arg = "x", y_arg = "y") {
   new_datetime(tzone = tzone(x))
 }
 

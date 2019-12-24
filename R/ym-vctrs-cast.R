@@ -1,71 +1,71 @@
 #' @export
 #' @rdname vctrs-compat
-#' @method vec_cast yearmonth
-#' @export vec_cast.yearmonth
-vec_cast.yearmonth <- function(x, to, ...) {
-  UseMethod("vec_cast.yearmonth")
+#' @method vec_cast ym
+#' @export vec_cast.ym
+vec_cast.ym <- function(x, to, ...) {
+  UseMethod("vec_cast.ym")
 }
 
-#' @method vec_cast.yearmonth default
+#' @method vec_cast.ym default
 #' @export
-vec_cast.yearmonth.default <- function(x, to, ...) {
+vec_cast.ym.default <- function(x, to, ...) {
   vec_default_cast(x, to)
 }
 
 # ------------------------------------------------------------------------------
 
-#' @method vec_cast.yearmonth yearmonth
+#' @method vec_cast.ym ym
 #' @export
-vec_cast.yearmonth.yearmonth <- function(x, to, ...) {
+vec_cast.ym.ym <- function(x, to, ...) {
   x
 }
 
 # ------------------------------------------------------------------------------
 
-#' @method vec_cast.yearmonth Date
+#' @method vec_cast.ym Date
 #' @export
-vec_cast.yearmonth.Date <- function(x, to, ...) {
+vec_cast.ym.Date <- function(x, to, ...) {
   months <- warp::warp_distance(x, by = "month")
-  yearmonth(months)
+  ym(months)
 }
 
-#' @method vec_cast.Date yearmonth
+#' @method vec_cast.Date ym
 #' @export
-vec_cast.Date.yearmonth <- function(x, to, ...) {
+vec_cast.Date.ym <- function(x, to, ...) {
   new_date(vec_data(x))
 }
 
 # ------------------------------------------------------------------------------
 
-#' @method vec_cast.yearmonth POSIXct
+#' @method vec_cast.ym POSIXct
 #' @export
-vec_cast.yearmonth.POSIXct <- function(x, to, ...) {
+vec_cast.ym.POSIXct <- function(x, to, ...) {
   months <- warp::warp_distance(x, by = "month")
-  yearmonth(months)
+  ym(months)
 }
 
-#' @method vec_cast.POSIXct yearmonth
+#' @method vec_cast.POSIXct ym
 #' @export
-vec_cast.POSIXct.yearmonth <- function(x, to, ...) {
+vec_cast.POSIXct.ym <- function(x, to, ...) {
   x <- vec_cast(x, new_date())
   vec_cast(x, to)
 }
 
 # ------------------------------------------------------------------------------
 
-#' @method vec_cast.yearmonth double
+#' @method vec_cast.ym double
 #' @export
-vec_cast.yearmonth.double <- function(x, to, ...) {
+vec_cast.ym.double <- function(x, to, ...) {
   if (!is_one_dim(x)) {
     stop_incompatible_cast(x, to)
   }
 
-  yearmonth(x)
+  ym(x)
 }
 
-#' @method vec_cast.double yearmonth
+#' @method vec_cast.double ym
 #' @export
-vec_cast.double.yearmonth <- function(x, to, ...) {
+vec_cast.double.ym <- function(x, to, ...) {
   if (!is_one_dim(to)) {
     stop_incompatible_cast(x, to)
   }
@@ -76,19 +76,19 @@ vec_cast.double.yearmonth <- function(x, to, ...) {
 
 # ------------------------------------------------------------------------------
 
-#' @method vec_cast.yearmonth integer
+#' @method vec_cast.ym integer
 #' @export
-vec_cast.yearmonth.integer <- function(x, to, ...) {
+vec_cast.ym.integer <- function(x, to, ...) {
   if (!is_one_dim(x)) {
     stop_incompatible_cast(x, to)
   }
 
-  yearmonth(x)
+  ym(x)
 }
 
-#' @method vec_cast.integer yearmonth
+#' @method vec_cast.integer ym
 #' @export
-vec_cast.integer.yearmonth <- function(x, to, ...) {
+vec_cast.integer.ym <- function(x, to, ...) {
   if (!is_one_dim(to)) {
     stop_incompatible_cast(x, to)
   }
@@ -103,19 +103,19 @@ vec_cast.integer.yearmonth <- function(x, to, ...) {
 
 # ------------------------------------------------------------------------------
 
-#' @method vec_cast.yearmonth character
+#' @method vec_cast.ym character
 #' @export
-vec_cast.yearmonth.character <- function(x, to, ...) {
+vec_cast.ym.character <- function(x, to, ...) {
   na <- is.na(x)
   x[!na] <- paste0(x[!na], "-01")
 
   x <- vec_cast(x, new_date())
 
-  vec_cast(x, yearmonth())
+  vec_cast(x, ym())
 }
 
-#' @method vec_cast.character yearmonth
+#' @method vec_cast.character ym
 #' @export
-vec_cast.character.yearmonth <- function(x, to, ...) {
+vec_cast.character.ym <- function(x, to, ...) {
   format(x)
 }
