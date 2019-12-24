@@ -10,6 +10,13 @@ ym <- function(x = integer()) {
 
 # ------------------------------------------------------------------------------
 
+#' @export
+is_ym <- function(x) {
+  inherits(x, "ym")
+}
+
+# ------------------------------------------------------------------------------
+
 # x = Number of days since 1970-01-01
 # Only allowed values should be month starts
 
