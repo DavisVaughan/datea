@@ -3,15 +3,6 @@ ym <- function(x = integer()) {
   x <- vec_cast(x, integer())
   size <- length(x)
 
-  if (size == 0L) {
-    return(new_ym())
-  }
-
-  # https://github.com/tidyverse/lubridate/issues/846
-  if (size == 1L && is.na(x)) {
-    return(new_ym(NA_real_))
-  }
-
   out <- months_to_days(x)
 
   new_ym(out)
@@ -19,7 +10,9 @@ ym <- function(x = integer()) {
 
 # x = Number of days since 1970-01-01
 # Only allowed values should be month starts
-# Internally stored as double for compat with most Date operations
+
+# Internally stored as double for compat with most Date operations,
+# but `ym()` forces input to be integer first to avoid fractional days
 
 new_ym <- function(x = double()) {
   vec_assert(x, ptype = double())
