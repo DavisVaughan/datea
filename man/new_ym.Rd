@@ -6,6 +6,14 @@
 \usage{
 new_ym(x = double())
 }
+\arguments{
+\item{x}{\verb{[double]}
+
+The number of months since \code{1970-01-01}, passed in as the number of days.}
+}
+\value{
+A ym object.
+}
 \description{
 \code{new_ym()} is a fast constructor of ym objects, with minimal checking.
 It is intended that \code{x} is restricted to only values that correspond to

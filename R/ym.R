@@ -1,4 +1,30 @@
+#' Construct a new year month
+#'
+#' `ym()` is a high level constructor for a year month object. It accepts
+#' integer year and month components to build the object from.
+#'
+#' @param year `[integer / NULL]`
+#'
+#'   The year value, in the range of `0-9999`. If left as `NULL` and any
+#'   `month` values are present, a default of `0` is used.
+#'
+#' @param month `[integer / NULL]`
+#'
+#'   The month value, in the range of `1-12`. If left as `NULL` and any `year`
+#'   values are present, a default of `1` is used.
+#'
+#' @return
+#' A ym object made from `year-month`.
+#'
 #' @export
+#' @examples
+#' ym()
+#'
+#' ym(2019)
+#'
+#' ym(2019, 2)
+#'
+#' ym(month = 2)
 ym <- function(year = NULL, month = NULL) {
   missing_year <- is.null(year)
   missing_month <- is.null(month)
@@ -18,6 +44,7 @@ ym <- function(year = NULL, month = NULL) {
     abort("`year` values must be between `0` and `9999`.")
   }
 
+  # Month becomes 0-based for counting purposes
   if (!missing_month) {
     month <- month - 1L
   }
@@ -29,6 +56,7 @@ ym <- function(year = NULL, month = NULL) {
   }
 
   if (missing_year) {
+    month <- month + years_to_months(0L)
     day <- months_to_days(month)
     return(new_ym(day))
   }
@@ -91,6 +119,13 @@ any_oob_year <- function(year) {
 #' There are a number of benefits gained from inheriting from `"Date"`. One of
 #' which is that functions that dispatch on `"Date"` will work automatically,
 #' like `lubridate::year()`.
+#'
+#' @param x `[double]`
+#'
+#'   The number of months since `1970-01-01`, passed in as the number of days.
+#'
+#' @return
+#' A ym object.
 #'
 #' @export
 #' @examples
