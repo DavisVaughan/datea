@@ -9,20 +9,6 @@ ym <- function(x = integer()) {
 
 # ------------------------------------------------------------------------------
 
-#' @export
-is_ym <- function(x) {
-  inherits(x, "ym")
-}
-
-# We could leave this to `is.numeric.Date()` but I'd rather not
-
-#' @export
-is.numeric.ym <- function(x) {
-  FALSE
-}
-
-# ------------------------------------------------------------------------------
-
 # x = Number of days since 1970-01-01
 # Only allowed values should be month starts
 
@@ -39,4 +25,18 @@ new_ym <- function(x = double()) {
   class(out) <- c(class(out), "Date")
 
   out
+}
+
+# ------------------------------------------------------------------------------
+
+#' @export
+is_ym <- function(x) {
+  inherits(x, "ym")
+}
+
+# We could leave this to `is.numeric.Date()` but I'd rather not
+
+#' @export
+is.numeric.ym <- function(x) {
+  FALSE
 }
