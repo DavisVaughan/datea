@@ -70,7 +70,7 @@ vec_arith.numeric.ym <- function(op, x, y, ...) {
 
   switch(
     op,
-    "+" = ym_integer_plus(x, y),
+    "+" = ym_integer_plus(y, x),
     stop_incompatible_op(op, x, y)
   )
 }
