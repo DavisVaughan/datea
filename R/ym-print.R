@@ -5,6 +5,7 @@ format.ym <- function(x, ...) {
   year <- x_lt$year + 1900L
   month <- x_lt$mon + 1L
 
+  year <- formatC(year, width = 4, flag = "0")
   month <- formatC(month, width = 2, flag = "0")
 
   out <- paste0(year, "-", month)
