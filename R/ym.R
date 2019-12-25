@@ -1,10 +1,72 @@
 #' @export
-ym <- function(x = integer()) {
-  x <- vec_cast(x, integer())
+ym <- function(year = NULL, month = NULL) {
+  missing_year <- is.null(year)
+  missing_month <- is.null(month)
 
-  out <- months_to_days(x)
+  if (missing_year && missing_month) {
+    return(new_ym())
+  }
 
-  new_ym(out)
+  year <- vec_cast(year, integer(), x_arg = "year")
+  month <- vec_cast(month, integer(), x_arg = "month")
+
+  if (any_oob_month(month)) {
+    abort("`month` values must be between `1` and `12`.")
+  }
+
+  if (any_oob_year(year)) {
+    abort("`year` values must be between `0` and `9999`.")
+  }
+
+  if (!missing_month) {
+    month <- month - 1L
+  }
+
+  if (missing_month) {
+    month <- years_to_months(year)
+    day <- months_to_days(month)
+    return(new_ym(day))
+  }
+
+  if (missing_year) {
+    day <- months_to_days(month)
+    return(new_ym(day))
+  }
+
+  n_year <- length(year)
+  n_month <- length(month)
+
+  if (n_year != n_month) {
+    abort(paste0(
+      "The length of `year` (", n_year, ") must be equal to ",
+      "the length of `month` (", n_month, ")."
+    ))
+  }
+
+  month <- month + years_to_months(year)
+  day <- months_to_days(month)
+
+  new_ym(day)
+}
+
+years_to_months <- function(year) {
+  (year - 1970L) * 12L
+}
+
+any_oob_month <- function(month) {
+  if (is.null(month)) {
+    return(FALSE)
+  }
+
+  any(month > 12L | month < 1L, na.rm = TRUE)
+}
+
+any_oob_year <- function(year) {
+  if (is.null(year)) {
+    return(FALSE)
+  }
+
+  any(year > 9999L | year < 0L, na.rm = TRUE)
 }
 
 # ------------------------------------------------------------------------------

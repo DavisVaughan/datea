@@ -26,7 +26,7 @@ vec_cast.ym.ym <- function(x, to, ...) {
 #' @export
 vec_cast.ym.Date <- function(x, to, ...) {
   months <- warp_distance(x, by = "month")
-  ym(months)
+  vec_cast.ym.double(months, to)
 }
 
 #' @method vec_cast.Date ym
@@ -42,8 +42,7 @@ vec_cast.Date.ym <- function(x, to, ...) {
 vec_cast.ym.POSIXct <- function(x, to, ...) {
   # Drop time zone before passing to warp_distance()
   x <- as.Date(x)
-  months <- warp_distance(x, by = "month")
-  ym(months)
+  vec_cast.ym.Date(x, to)
 }
 
 #' @method vec_cast.POSIXct ym
@@ -60,8 +59,7 @@ vec_cast.POSIXct.ym <- function(x, to, ...) {
 vec_cast.ym.POSIXlt <- function(x, to, ...) {
   # Drop time zone before passing to warp_distance()
   x <- as.Date(x)
-  months <- warp_distance(x, by = "month")
-  ym(months)
+  vec_cast.ym.Date(x, to)
 }
 
 #' @method vec_cast.POSIXlt ym
@@ -80,7 +78,9 @@ vec_cast.ym.double <- function(x, to, ...) {
     stop_incompatible_cast(x, to)
   }
 
-  ym(x)
+  x <- vec_cast(x, integer())
+  out <- months_to_days(x)
+  new_ym(out)
 }
 
 #' @method vec_cast.double ym
@@ -91,7 +91,7 @@ vec_cast.double.ym <- function(x, to, ...) {
   }
 
   x <- vec_cast(x, new_date())
-  warp::warp_distance(x, by = "month")
+  warp_distance(x, by = "month")
 }
 
 # ------------------------------------------------------------------------------
@@ -103,7 +103,8 @@ vec_cast.ym.integer <- function(x, to, ...) {
     stop_incompatible_cast(x, to)
   }
 
-  ym(x)
+  out <- months_to_days(x)
+  new_ym(out)
 }
 
 #' @method vec_cast.integer ym
@@ -115,10 +116,7 @@ vec_cast.integer.ym <- function(x, to, ...) {
 
   x <- vec_cast(x, new_date())
   out <- warp_distance(x, by = "month")
-
-  # warp_distance() returns a double, but for `by = "month"` it
-  # always fits in an integer
-  as.integer(out)
+  vec_cast(out, integer())
 }
 
 # ------------------------------------------------------------------------------
@@ -131,7 +129,7 @@ vec_cast.ym.character <- function(x, to, ...) {
 
   x <- vec_cast(x, new_date())
 
-  vec_cast(x, ym())
+  vec_cast(x, new_ym())
 }
 
 #' @method vec_cast.character ym

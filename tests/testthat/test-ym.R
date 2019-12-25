@@ -25,15 +25,15 @@ test_that("can technically create invalid ym objects", {
 # is
 
 test_that("can recognize ym() objects", {
-  expect_true(is_ym(ym()))
+  expect_true(is_ym(new_ym()))
   expect_false(is_ym(1))
   expect_false(is_ym(new_date()))
 })
 
 test_that("ym() objects are correctly not numeric", {
-  expect_false(is.numeric(ym()))
+  expect_false(is.numeric(new_ym()))
 })
 
 test_that("ym() objects are Dates", {
-  expect_s3_class(ym(), "Date")
+  expect_s3_class(new_ym(), "Date")
 })

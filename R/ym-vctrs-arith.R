@@ -77,10 +77,10 @@ vec_arith.numeric.ym <- function(op, x, y, ...) {
 
 ym_integer_minus <- function(x, y) {
   months <- vec_cast(x, integer()) - y
-  ym(months)
+  vec_cast(months, new_ym())
 }
 
 ym_integer_plus <- function(x, y) {
   months <- vec_cast(x, integer()) + y
-  ym(months)
+  vec_cast(months, new_ym())
 }
