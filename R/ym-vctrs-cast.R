@@ -117,7 +117,7 @@ vec_cast.integer.ym <- function(x, to, ...) {
   out <- warp_distance(x, by = "month")
 
   # warp_distance() returns a double, but for `by = "month"` it
-  # is always fits in an integer
+  # always fits in an integer
   as.integer(out)
 }
 
