@@ -25,7 +25,7 @@ vec_cast.ym.ym <- function(x, to, ...) {
 #' @method vec_cast.ym Date
 #' @export
 vec_cast.ym.Date <- function(x, to, ...) {
-  months <- warp::warp_distance(x, by = "month")
+  months <- warp_distance(x, by = "month")
   ym(months)
 }
 
@@ -42,7 +42,7 @@ vec_cast.Date.ym <- function(x, to, ...) {
 vec_cast.ym.POSIXct <- function(x, to, ...) {
   # Drop time zone before passing to warp_distance()
   x <- as.Date(x)
-  months <- warp::warp_distance(x, by = "month")
+  months <- warp_distance(x, by = "month")
   ym(months)
 }
 
@@ -60,7 +60,7 @@ vec_cast.POSIXct.ym <- function(x, to, ...) {
 vec_cast.ym.POSIXlt <- function(x, to, ...) {
   # Drop time zone before passing to warp_distance()
   x <- as.Date(x)
-  months <- warp::warp_distance(x, by = "month")
+  months <- warp_distance(x, by = "month")
   ym(months)
 }
 
@@ -114,7 +114,7 @@ vec_cast.integer.ym <- function(x, to, ...) {
   }
 
   x <- vec_cast(x, new_date())
-  out <- warp::warp_distance(x, by = "month")
+  out <- warp_distance(x, by = "month")
 
   # warp_distance() returns a double, but for `by = "month"` it
   # is always fits in an integer
