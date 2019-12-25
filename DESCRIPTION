@@ -24,5 +24,5 @@ BugReports: https://github.com/DavisVaughan/timeclass/issues
 Suggests: 
     testthat (>= 2.1.0)
 Remotes:
-    r-lib/vctrs#716,
+    r-lib/vctrs,
     DavisVaughan/warp
