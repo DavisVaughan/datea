@@ -5,8 +5,8 @@
 #'
 #' @param year `[integer / NULL]`
 #'
-#'   The year value, in the range of `0-9999`. If left as `NULL` and any
-#'   `month` values are present, a default of `0` is used.
+#'   The year value. If left as `NULL` and any `month` values are present,
+#'   a default of `0` is used.
 #'
 #' @param month `[integer / NULL]`
 #'
@@ -38,10 +38,6 @@ ym <- function(year = NULL, month = NULL) {
 
   if (any_oob_month(month)) {
     abort("`month` values must be between `1` and `12`.")
-  }
-
-  if (any_oob_year(year)) {
-    abort("`year` values must be between `0` and `9999`.")
   }
 
   # Month becomes 0-based for counting purposes
@@ -87,14 +83,6 @@ any_oob_month <- function(month) {
   }
 
   any(month > 12L | month < 1L, na.rm = TRUE)
-}
-
-any_oob_year <- function(year) {
-  if (is.null(year)) {
-    return(FALSE)
-  }
-
-  any(year > 9999L | year < 0L, na.rm = TRUE)
 }
 
 # ------------------------------------------------------------------------------

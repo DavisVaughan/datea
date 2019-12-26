@@ -1,9 +1,14 @@
 #' @export
 format.ym <- function(x, ...) {
-  x_lt <- as.POSIXlt(x)
+  # Avoid going through vec_cast.POSIXlt.ym() which goes through
+  # vec_cast.POSIXlt.Date(). This uses as.character() on the date
+  # then converts to POSIXlt to retain wall time, but strptime() only
+  # works with years in the 0-9999 range.
+  components <- vec_cast(x, new_date())
+  components <- as.POSIXlt(components)
 
-  year <- x_lt$year + 1900L
-  month <- x_lt$mon + 1L
+  year <- components$year + 1900L
+  month <- components$mon + 1L
 
   year <- formatC(year, width = 4, flag = "0")
   month <- formatC(month, width = 2, flag = "0")

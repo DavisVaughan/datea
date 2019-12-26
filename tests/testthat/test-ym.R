@@ -30,9 +30,9 @@ test_that("year and month must be integer ish", {
   expect_error(ym(month = 1.5), class = "vctrs_error_cast_lossy")
 })
 
-test_that("year must be between 0 and 9999", {
-  expect_error(ym(year = -1), "`0` and `9999`")
-  expect_error(ym(year = 10000), "`0` and `9999`")
+test_that("year can be outside 0 and 9999", {
+  expect_equal(ym(year = -1), new_ym(-719893))
+  expect_equal(ym(year = 10000), new_ym(2932897))
 })
 
 test_that("month must be between 1 and 12", {

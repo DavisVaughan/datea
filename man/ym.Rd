@@ -9,8 +9,8 @@ ym(year = NULL, month = NULL)
 \arguments{
 \item{year}{\verb{[integer / NULL]}
 
-The year value, in the range of \code{0-9999}. If left as \code{NULL} and any
-\code{month} values are present, a default of \code{0} is used.}
+The year value. If left as \code{NULL} and any \code{month} values are present,
+a default of \code{0} is used.}
 
 \item{month}{\verb{[integer / NULL]}
 
