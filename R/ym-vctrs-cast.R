@@ -25,7 +25,7 @@ vec_cast.ym.ym <- function(x, to, ...) {
 #' @method vec_cast.ym Date
 #' @export
 vec_cast.ym.Date <- function(x, to, ...) {
-  months <- warp_distance(x, by = "month")
+  months <- warp_distance(x, period = "month")
   vec_cast.ym.double(months, to)
 }
 
@@ -91,7 +91,7 @@ vec_cast.double.ym <- function(x, to, ...) {
   }
 
   x <- vec_cast(x, new_date())
-  warp_distance(x, by = "month")
+  warp_distance(x, period = "month")
 }
 
 # ------------------------------------------------------------------------------
@@ -115,7 +115,7 @@ vec_cast.integer.ym <- function(x, to, ...) {
   }
 
   x <- vec_cast(x, new_date())
-  out <- warp_distance(x, by = "month")
+  out <- warp_distance(x, period = "month")
   vec_cast(out, integer())
 }
 
