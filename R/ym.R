@@ -70,8 +70,8 @@ any_oob_month <- function(month) {
 #' @export
 #' @examples
 #' # Internally stored as the number of months since 1970-01-01
-#' new_ym(0)
-#' new_ym(100)
+#' new_ym(0L)
+#' new_ym(100L)
 new_ym <- function(x = integer()) {
   vec_assert(x, ptype = integer())
 

@@ -22,6 +22,6 @@ epoch of 1970-01-01. For more robust creation of ym objects, see \code{\link[=ym
 }
 \examples{
 # Internally stored as the number of months since 1970-01-01
-new_ym(0)
-new_ym(100)
+new_ym(0L)
+new_ym(100L)
 }
