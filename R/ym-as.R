@@ -1,3 +1,13 @@
+#' Coerce to year month
+#'
+#' @param x `[vector]`
+#'
+#'   An object to coerce to ym.
+#'
+#' @param ...
+#'
+#'   Not used.
+#'
 #' @export
 as_ym <- function(x, ...) {
   UseMethod("as_ym")
