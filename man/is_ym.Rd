@@ -18,7 +18,6 @@ A logical of length 1. \code{TRUE} if \code{x} is a ym, otherwise \code{FALSE}.
 Test if \code{x} is a ym object.
 }
 \examples{
-is_ym(ym(1))
-
+is_ym(new_ym(1L))
 is_ym(1)
 }

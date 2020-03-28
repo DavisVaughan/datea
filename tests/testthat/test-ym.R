@@ -65,10 +65,6 @@ test_that("can recognize ym() objects", {
   expect_false(is_ym(new_date()))
 })
 
-test_that("ym() objects are correctly not numeric", {
-  expect_false(is.numeric(new_ym()))
-})
-
-test_that("ym() objects are Dates", {
-  expect_s3_class(new_ym(), "Date")
+test_that("ym() objects are technically seen as numeric", {
+  expect_true(is.numeric(new_ym()))
 })

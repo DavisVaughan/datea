@@ -130,18 +130,8 @@ new_ym <- function(x = integer()) {
 #'
 #' @export
 #' @examples
-#' is_ym(ym(1))
-#'
+#' is_ym(new_ym(1L))
 #' is_ym(1)
 is_ym <- function(x) {
   inherits(x, "ym")
-}
-
-# ------------------------------------------------------------------------------
-
-# We could leave this to `is.numeric.Date()` but I'd rather not
-
-#' @export
-is.numeric.ym <- function(x) {
-  FALSE
 }
