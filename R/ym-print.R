@@ -4,10 +4,13 @@ format.ym <- function(x, ...) {
   year <- result[[1]]
   month <- result[[2]]
 
-  year <- formatC(year, width = 4, flag = "0")
-  month <- formatC(month, width = 2, flag = "0")
+  negative <- year < 0
+  out_year <- formatC(abs(year), width = 4, flag = "0")
+  out_year[negative] <- paste0("-", out_year[negative])
 
-  out <- paste0(year, "-", month)
+  out_month <- formatC(month, width = 2, flag = "0")
+
+  out <- paste0(out_year, "-", out_month)
 
   # Don't use `NA_character_`, as obj_print_data.default() will use
   # `print(quote = FALSE)` which prints it as `<NA>`
