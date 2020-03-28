@@ -1,3 +1,11 @@
+# ------------------------------------------------------------------------------
+# Persistent globals
+
+delayedAssign("timeclass_global_empty_ym", new_ym())
+delayedAssign("timeclass_global_empty_date", new_date())
+
+# ------------------------------------------------------------------------------
+
 tzone <- function(x) {
   attr(x, "tzone")[[1]] %||% ""
 }
