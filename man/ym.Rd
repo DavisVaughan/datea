@@ -4,32 +4,28 @@
 \alias{ym}
 \title{Construct a new year month}
 \usage{
-ym(year = NULL, month = NULL)
+ym(year, month)
 }
 \arguments{
-\item{year}{\verb{[integer / NULL]}
+\item{year}{\verb{[integer]}
 
-The year value. If left as \code{NULL} and any \code{month} values are present,
-a default of \code{0} is used.}
+The year value.}
 
-\item{month}{\verb{[integer / NULL]}
+\item{month}{\verb{[integer]}
 
-The month value, in the range of \code{1-12}. If left as \code{NULL} and any \code{year}
-values are present, a default of \code{1} is used.}
+The month value, in the range of \code{1-12}.}
 }
 \value{
-A ym object made from \code{year-month}.
+A ym object.
 }
 \description{
 \code{ym()} is a high level constructor for a year month object. It accepts
 integer year and month components to build the object from.
 }
+\details{
+\code{year} and \code{month} are recycled to a common size.
+}
 \examples{
-ym()
-
-ym(2019)
-
 ym(2019, 2)
-
-ym(month = 2)
+ym(2019, c(11, 12))
 }

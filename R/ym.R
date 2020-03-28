@@ -1,38 +1,28 @@
 #' Construct a new year month
 #'
+#' @description
 #' `ym()` is a high level constructor for a year month object. It accepts
 #' integer year and month components to build the object from.
 #'
-#' @param year `[integer / NULL]`
+#' @details
+#' `year` and `month` are recycled to a common size.
 #'
-#'   The year value. If left as `NULL` and any `month` values are present,
-#'   a default of `0` is used.
+#' @param year `[integer]`
 #'
-#' @param month `[integer / NULL]`
+#'   The year value.
 #'
-#'   The month value, in the range of `1-12`. If left as `NULL` and any `year`
-#'   values are present, a default of `1` is used.
+#' @param month `[integer]`
+#'
+#'   The month value, in the range of `1-12`.
 #'
 #' @return
-#' A ym object made from `year-month`.
+#' A ym object.
 #'
 #' @export
 #' @examples
-#' ym()
-#'
-#' ym(2019)
-#'
 #' ym(2019, 2)
-#'
-#' ym(month = 2)
-ym <- function(year = NULL, month = NULL) {
-  missing_year <- is.null(year)
-  missing_month <- is.null(month)
-
-  if (missing_year && missing_month) {
-    return(new_ym())
-  }
-
+#' ym(2019, c(11, 12))
+ym <- function(year, month) {
   year <- vec_cast(year, integer(), x_arg = "year")
   month <- vec_cast(month, integer(), x_arg = "month")
 
@@ -40,37 +30,16 @@ ym <- function(year = NULL, month = NULL) {
     abort("`month` values must be between `1` and `12`.")
   }
 
+  args <- vec_recycle_common(year, month)
+  year <- args[[1]]
+  month <- args[[2]]
+
   # Month becomes 0-based for counting purposes
-  if (!missing_month) {
-    month <- month - 1L
-  }
-
-  if (missing_month) {
-    month <- years_to_months(year)
-    day <- months_to_days(month)
-    return(new_ym(day))
-  }
-
-  if (missing_year) {
-    month <- month + years_to_months(0L)
-    day <- months_to_days(month)
-    return(new_ym(day))
-  }
-
-  n_year <- length(year)
-  n_month <- length(month)
-
-  if (n_year != n_month) {
-    abort(paste0(
-      "The length of `year` (", n_year, ") must be equal to ",
-      "the length of `month` (", n_month, ")."
-    ))
-  }
+  month <- month - 1L
 
   month <- month + years_to_months(year)
-  day <- months_to_days(month)
 
-  new_ym(day)
+  new_ym(month)
 }
 
 years_to_months <- function(year) {
@@ -78,10 +47,6 @@ years_to_months <- function(year) {
 }
 
 any_oob_month <- function(month) {
-  if (is.null(month)) {
-    return(FALSE)
-  }
-
   any(month > 12L | month < 1L, na.rm = TRUE)
 }
 
