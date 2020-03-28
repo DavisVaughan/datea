@@ -28,14 +28,3 @@ as_ym.POSIXt <- function(x, ...) {
 as_ym.numeric <- function(x, ...) {
   vec_cast(x, new_ym())
 }
-
-# ------------------------------------------------------------------------------
-
-# TODO - Remove after:
-# https://github.com/r-lib/vctrs/issues/717
-
-#' @export
-as.POSIXlt.vctrs_vctr <- function(x, tz = "", ...) {
-  to <- as.POSIXlt(new_datetime(), tz = tz)
-  vec_cast(x, to)
-}
