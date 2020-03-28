@@ -9,7 +9,7 @@ static inline int months_to_days_impl(int months);
  * from that origin. The number of days correspond to the first of the month
  * that `x` offsets to.
  */
-SEXP months_to_days(SEXP x) {
+static SEXP months_to_days(SEXP x) {
   R_xlen_t size = Rf_xlength(x);
 
   SEXP out = PROTECT(Rf_allocVector(REALSXP, size));
@@ -35,6 +35,51 @@ SEXP months_to_days(SEXP x) {
 // [[ export() ]]
 SEXP timeclass_months_to_days(SEXP x) {
   return months_to_days(x);
+}
+
+
+static inline void months_to_year_month_impl(int months, int* year, int* month);
+
+static SEXP months_to_year_month(SEXP x) {
+  R_xlen_t size = Rf_xlength(x);
+
+  SEXP year = PROTECT(Rf_allocVector(INTSXP, size));
+  int* p_year = INTEGER(year);
+
+  SEXP month = PROTECT(Rf_allocVector(INTSXP, size));
+  int* p_month = INTEGER(month);
+
+  const int* p_x = INTEGER(x);
+
+  for (R_xlen_t i = 0; i < size; ++i) {
+    const int elt = p_x[i];
+
+    if (elt == NA_INTEGER) {
+      p_year[i] = NA_INTEGER;
+      p_month[i] = NA_INTEGER;
+      continue;
+    }
+
+    int elt_year;
+    int elt_month;
+
+    months_to_year_month_impl(elt, &elt_year, &elt_month);
+
+    p_year[i] = elt_year;
+    p_month[i] = elt_month;
+  }
+
+  SEXP out = PROTECT(Rf_allocVector(VECSXP, 2));
+  SET_VECTOR_ELT(out, 0, year);
+  SET_VECTOR_ELT(out, 1, month);
+
+  UNPROTECT(3);
+  return out;
+}
+
+// [[ export() ]]
+SEXP timeclass_months_to_year_month(SEXP x) {
+  return months_to_year_month(x);
 }
 
 // -----------------------------------------------------------------------------
@@ -63,6 +108,21 @@ static inline int months_to_days_impl(int months) {
 
   int days = days_before_year(year) + days_before_month(year, month);
   return days - DAYS_FROM_0001_01_01_TO_EPOCH;
+}
+
+static inline void months_to_year_month_impl(int months, int* year, int* month) {
+  months += MONTHS_FROM_0001_01_01_TO_EPOCH;
+
+  int year_;
+  int month_;
+
+  divmod(months, MONTHS_IN_YEAR, &year_, &month_);
+
+  ++year_;
+  ++month_;
+
+  *year = year_;
+  *month = month_;
 }
 
 #undef MONTHS_FROM_0001_01_01_TO_EPOCH
