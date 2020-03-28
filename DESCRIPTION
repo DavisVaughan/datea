@@ -17,7 +17,8 @@ Imports:
     vctrs (>= 0.2.99.9010),
     warp
 Suggests: 
-    testthat (>= 2.1.0)
+    testthat (>= 2.1.0),
+    covr
 Remotes:
     r-lib/vctrs#970
 Encoding: UTF-8
