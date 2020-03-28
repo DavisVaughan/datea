@@ -4,42 +4,24 @@
 \alias{new_ym}
 \title{Construct a new year month}
 \usage{
-new_ym(x = double())
+new_ym(x = integer())
 }
 \arguments{
-\item{x}{\verb{[double]}
+\item{x}{\verb{[integer]}
 
-The number of months since \code{1970-01-01}, passed in as the number of days.}
+The number of months since \code{1970-01-01}.}
 }
 \value{
 A ym object.
 }
 \description{
 \code{new_ym()} is a fast constructor of ym objects, with minimal checking.
-It is intended that \code{x} is restricted to only values that correspond to
-the first day of the month, but importantly this is not checked here. For
-more robust creation of ym objects, see \code{\link[=ym]{ym()}} or \code{\link[=as_ym]{as_ym()}}.
-}
-\details{
-\code{new_ym()} is suitable for use as a prototype for the ym class.
-
-Internally, a ym is stored as the number of days since \code{"1970-01-01"}, the
-same as the Date class. It is stored as a double rather than an integer,
-since most of the time this is what Date does as well.
-
-A ym inherits from \code{"Date"} as its highest superclass, but also inherits
-from the class \code{"vctrs_vctr"} to gain the well-thought-out vctrs methods.
-There are a number of benefits gained from inheriting from \code{"Date"}. One of
-which is that functions that dispatch on \code{"Date"} will work automatically,
-like \code{lubridate::year()}.
+A ym object is constructed from the integer number of months since the Unix
+epoch of 1970-01-01. For more robust creation of ym objects, see \code{\link[=ym]{ym()}} or
+\code{\link[=as_ym]{as_ym()}}.
 }
 \examples{
-# Internally stored as the number of days since 1970-01-01
+# Internally stored as the number of months since 1970-01-01
 new_ym(0)
-new_ym(31)
-
-# But this is not enforced with this low-level constructor,
-# so technically you can create ym objects with invalid entries
-new_ym(2)
-as.Date(new_ym(2))
+new_ym(100)
 }

@@ -48,14 +48,12 @@ test_that("can construct a ym prototype", {
 })
 
 test_that("can construct new ym objects", {
-  expect_s3_class(new_ym(0), "ym")
-  expect_length(new_ym(c(0, 1)), 2)
+  expect_s3_class(new_ym(0L), "ym")
+  expect_length(new_ym(c(0L, 1L)), 2)
 })
 
-test_that("can technically create invalid ym objects", {
-  x <- new_ym(c(2, 1.5))
-  expect_s3_class(x, "ym")
-  expect_equal(vec_data(x), c(2, 1.5))
+test_that("ym must be an integer", {
+  expect_error(new_ym(1), class = "vctrs_error_assert_ptype")
 })
 
 # ------------------------------------------------------------------------------
