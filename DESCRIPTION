@@ -1,27 +1,27 @@
 Package: timeclass
-Title: What the Package Does (One Line, Title Case)
+Title: Extended Date Classes
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
-           role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+    c(person(given = "Davis",
+             family = "Vaughan",
+             role = c("aut", "cre"),
+             email = "davis@rstudio.com"),
+      person(given = "RStudio",
+             role = "cph"))
 Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to
-    pick a license
-Encoding: UTF-8
-LazyData: true
-Roxygen: list(markdown = TRUE)
-Imports: 
-    vctrs (>= 0.2.99.9010),
-    warp,
-    rlang,
-    ellipsis
-RoxygenNote: 7.1.0
+License: MIT + file LICENSE
 URL: https://github.com/DavisVaughan/timeclass
 BugReports: https://github.com/DavisVaughan/timeclass/issues
+Imports: 
+    ellipsis,
+    rlang,
+    vctrs (>= 0.2.99.9010),
+    warp
 Suggests: 
     testthat (>= 2.1.0)
 Remotes:
     r-lib/vctrs
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.0
