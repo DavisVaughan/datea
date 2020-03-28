@@ -14,7 +14,7 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 Imports: 
-    vctrs,
+    vctrs (>= 0.2.99.9010),
     warp,
     rlang,
     ellipsis
