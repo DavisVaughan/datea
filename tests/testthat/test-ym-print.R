@@ -1,3 +1,11 @@
+test_that("vctrs abbreviation is right", {
+  expect_identical(vec_ptype_abbr(new_ym()), "ym")
+})
+
+test_that("vctrs full type is right", {
+  expect_identical(vec_ptype_full(new_ym()), "ym")
+})
+
 test_that("ym print method has informative output", {
   verify_output(test_path("output", "test-ym-print.txt"), {
     "# zero length"
