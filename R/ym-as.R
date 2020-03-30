@@ -149,3 +149,46 @@ as.POSIXlt.ym <- function(x, tz = "UTC", ...) {
 force_to_posixlt_from_ym <- function(x, tz) {
   force_to_posixt_from_ym(x, tz, posixct = FALSE)
 }
+
+# ------------------------------------------------------------------------------
+
+#' @export
+as.character.ym <- function(x, ...) {
+  if (!missing(...)) {
+    ellipsis::check_dots_empty()
+  }
+
+  force_to_character_from_ym(x)
+}
+
+force_to_character_from_ym <- function(x) {
+  # Avoid `formatC(character())` bug with zero-length input
+  if (vec_size(x) == 0L) {
+    out <- character()
+    out <- set_names(out, names(x))
+    return(out)
+  }
+
+  result <- months_to_year_month(x)
+  year <- result[[1]]
+  month <- result[[2]]
+
+  negative <- year < 0
+
+  if (any(negative, na.rm = TRUE)) {
+    out_year <- formatC(abs(year), width = 4, flag = "0")
+    out_year[negative] <- paste0("-", out_year[negative])
+  } else {
+    out_year <- formatC(year, width = 4, flag = "0")
+  }
+
+  out_month <- formatC(month, width = 2, flag = "0")
+
+  out <- paste(out_year, out_month, sep = "-")
+
+  out[is.na(x)] <- NA_character_
+
+  names(out) <- names(x)
+
+  out
+}

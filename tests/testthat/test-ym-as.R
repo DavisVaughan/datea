@@ -143,6 +143,35 @@ test_that("can modify time zone and keep clock time", {
 })
 
 # ------------------------------------------------------------------------------
+# ym -> character
+
+test_that("dots are checked", {
+  expect_error(as.character(new_ym(), 1))
+})
+
+test_that("can force", {
+  expect_identical(as.character(new_ym(0L)), "1970-01")
+  expect_identical(as.character(new_ym(11L)), "1970-12")
+})
+
+test_that("retains names", {
+  expect_named(as.character(set_names(new_ym(0L), "x")), "x")
+})
+
+test_that("NA are converted to NA_character_", {
+  expect_identical(as.character(new_ym(NA_integer_)), NA_character_)
+})
+
+test_that("year >=10000 are fully printed", {
+  expect_identical(as.character(ym(10000, 1)), "10000-01")
+})
+
+test_that("negative years retain negative sign and print with at least 4 digits", {
+  expect_identical(as.character(ym(-1, 1)), "-0001-01")
+  expect_identical(as.character(ym(-10000, 1)), "-10000-01")
+})
+
+# ------------------------------------------------------------------------------
 
 test_that("`as_ym()` gives informative errors", {
   verify_output(test_path("errors", "test-ym-as.txt"), {
