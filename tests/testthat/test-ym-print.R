@@ -2,6 +2,10 @@ test_that("can format", {
   expect_identical(format(new_ym(1L)), "1970-02")
 })
 
+test_that("retains names", {
+  expect_named(format(set_names(new_ym(1L), "x")), "x")
+})
+
 test_that("NA are formatted as character strings", {
   expect_identical(format(new_ym(NA_integer_)), "NA")
 })
@@ -42,5 +46,8 @@ test_that("ym print method has informative output", {
     ym(1, 1)
     ym(10, 1)
     ym(100, 1)
+
+    "# names are printed"
+    set_names(new_ym(0L), "x")
   })
 })

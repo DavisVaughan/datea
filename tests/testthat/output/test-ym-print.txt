@@ -37,3 +37,12 @@ years 0 < x < 1000 print with 4 digits, left pad with zeros
 <ym[1]>
 [1] 0100-01
 
+
+names are printed
+=================
+
+> set_names(new_ym(0L), "x")
+<ym[1]>
+      x 
+1970-01 
+
