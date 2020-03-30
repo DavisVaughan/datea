@@ -193,3 +193,37 @@ force_to_character_from_ym <- function(x) {
 
   out
 }
+
+# ------------------------------------------------------------------------------
+
+#' @export
+as.integer.ym <- function(x, ...) {
+  if (!missing(...)) {
+    ellipsis::check_dots_empty()
+  }
+
+  force_to_integer_from_ym(x)
+}
+
+force_to_integer_from_ym <- function(x) {
+  vec_data(x)
+}
+
+# ------------------------------------------------------------------------------
+
+#' @export
+as.double.ym <- function(x, ...) {
+  if (!missing(...)) {
+    ellipsis::check_dots_empty()
+  }
+
+  force_to_double_from_ym(x)
+}
+
+force_to_double_from_ym <- function(x) {
+  out <- force_to_integer_from_ym(x)
+  # `as.double()` purposefully drops names
+  out <- as.double(out)
+  names(out) <- names(x)
+  out
+}

@@ -172,6 +172,38 @@ test_that("negative years retain negative sign and print with at least 4 digits"
 })
 
 # ------------------------------------------------------------------------------
+# ym -> integer
+
+test_that("dots are checked", {
+  expect_error(as.integer(new_ym(), 1))
+})
+
+test_that("can force", {
+  expect_identical(as.integer(new_ym(0L)), 0L)
+  expect_identical(as.integer(new_ym(11L)), 11L)
+})
+
+test_that("retains names", {
+  expect_named(as.integer(set_names(new_ym(0L), "x")), "x")
+})
+
+# ------------------------------------------------------------------------------
+# ym -> double
+
+test_that("dots are checked", {
+  expect_error(as.double(new_ym(), 1))
+})
+
+test_that("can force", {
+  expect_identical(as.double(new_ym(0L)), 0)
+  expect_identical(as.double(new_ym(11L)), 11)
+})
+
+test_that("retains names", {
+  expect_named(as.double(set_names(new_ym(0L), "x")), "x")
+})
+
+# ------------------------------------------------------------------------------
 
 test_that("`as_ym()` gives informative errors", {
   verify_output(test_path("errors", "test-ym-as.txt"), {
