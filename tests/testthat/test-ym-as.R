@@ -2,6 +2,10 @@
 # ------------------------------------------------------------------------------
 # ym -> ym
 
+test_that("dots are checked", {
+  expect_error(as_ym(new_ym(), 1))
+})
+
 test_that("can force", {
   expect_identical(as_ym(new_ym()), new_ym())
 })
@@ -75,6 +79,10 @@ test_that("time zone doesn't matter", {
 # ------------------------------------------------------------------------------
 # ym -> Date
 
+test_that("dots are checked", {
+  expect_error(as.Date(new_ym(), 1))
+})
+
 test_that("can force", {
   expect_identical(as.Date(new_ym(0L)), new_date(0))
   expect_identical(as.Date(new_ym(1L)), new_date(31))
@@ -86,6 +94,10 @@ test_that("retains names", {
 
 # ------------------------------------------------------------------------------
 # ym -> POSIXct
+
+test_that("dots are checked", {
+  expect_error(as.POSIXct(new_ym(), tz = "UTC", 1))
+})
 
 test_that("can force", {
   expect_identical(as.POSIXct(new_ym(0L)), as.POSIXct("1970-01-01", tz = "UTC"))
@@ -107,6 +119,10 @@ test_that("can modify time zone and keep clock time", {
 
 # ------------------------------------------------------------------------------
 # ym -> POSIXlt
+
+test_that("dots are checked", {
+  expect_error(as.POSIXlt(new_ym(), tz = "UTC", 1))
+})
 
 test_that("can force", {
   expect_identical(as.POSIXlt(new_ym(0L)), as.POSIXlt("1970-01-01", tz = "UTC"))
