@@ -22,14 +22,6 @@ NA values don't print like <NA>
 [1] NA
 
 
-years >9999 print with 5 digits
-===============================
-
-> ym(10000, 1)
-<ym[1]>
-[1] 10000-01
-
-
 years 0 < x < 1000 print with 4 digits, left pad with zeros
 ===========================================================
 
@@ -44,20 +36,4 @@ years 0 < x < 1000 print with 4 digits, left pad with zeros
 > ym(100, 1)
 <ym[1]>
 [1] 0100-01
-
-
-years -1000 < x < 0 print with a negative and 4 digits
-======================================================
-
-> ym(-1, 1)
-<ym[1]>
-[1] -0001-01
-
-> ym(-10, 1)
-<ym[1]>
-[1] -0010-01
-
-> ym(-100, 1)
-<ym[1]>
-[1] -0100-01
 

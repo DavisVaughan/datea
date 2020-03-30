@@ -1,18 +1,14 @@
 #' @export
-format.ym <- function(x, ...) {
-  result <- months_to_year_month(x)
-  year <- result[[1]]
-  month <- result[[2]]
+format.ym <- function(x, format = "%Y-%m", ...) {
+  if (!missing(...)) {
+    ellipsis::check_dots_empty()
+  }
 
-  negative <- year < 0
-  out_year <- formatC(abs(year), width = 4, flag = "0")
-  out_year[negative] <- paste0("-", out_year[negative])
+  x_lt <- as.POSIXlt(x)
 
-  out_month <- formatC(month, width = 2, flag = "0")
+  out <- format(x_lt, format = format, usetz = FALSE)
 
-  out <- paste0(out_year, "-", out_month)
-
-  # Don't use `NA_character_`, as obj_print_data.default() will use
+  # Don't use `NA_character_`, as `obj_print_data.default()` will use
   # `print(quote = FALSE)` which prints it as `<NA>`
   out[is.na(x)] <- "NA"
 
