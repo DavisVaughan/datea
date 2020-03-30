@@ -21,7 +21,7 @@ Suggests:
     testthat (>= 2.1.0),
     covr
 Remotes:
-    r-lib/vctrs#970
+    r-lib/vctrs
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
