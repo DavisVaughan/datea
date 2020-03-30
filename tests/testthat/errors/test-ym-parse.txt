@@ -1,0 +1,22 @@
+
+throws warnings on failure to parse
+===================================
+
+> ym_parse("1970")
+Warning: Unable to parse to year month at location 1. Returning `NA` at that location.
+
+<ym[1]>
+[1] NA
+
+> ym_parse(c(rep("1970", 2), "1970-01", "1970"))
+Warning: Unable to parse to year month at locations 1, 2, 4. Returning `NA` at those locations.
+
+<ym[4]>
+[1] NA      NA      1970-01 NA     
+
+> ym_parse(rep("1970", 6))
+Warning: Unable to parse to year month at locations 1, 2, 3, 4, 5, etc. Returning `NA` at those locations.
+
+<ym[6]>
+[1] NA NA NA NA NA NA
+
