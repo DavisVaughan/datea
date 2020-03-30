@@ -1,6 +1,4 @@
 # TODO:
-# as_ym.integer()
-# as_ym.double()
 # as_ym.character()
 
 #' Coerce to year month
@@ -84,6 +82,22 @@ force_to_ym_from_posixlt <- function(x) {
 
   # `as.Date.POSIXlt()` used in `force_to_ym_from_posixt()`
   # doesn't retain names! Bug!
+  names(out) <- names(x)
+
+  out
+}
+
+#' @export
+as_ym.integer <- function(x, ...) {
+  new_ym(x)
+}
+
+#' @export
+as_ym.double <- function(x, ...) {
+  out <- vec_cast(x, integer())
+  out <- new_ym(out)
+
+  # `vec_cast()` currently doesn't always keep names
   names(out) <- names(x)
 
   out

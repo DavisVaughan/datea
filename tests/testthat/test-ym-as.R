@@ -77,6 +77,32 @@ test_that("time zone doesn't matter", {
 })
 
 # ------------------------------------------------------------------------------
+# integer -> ym
+
+test_that("can force", {
+  expect_identical(as_ym(1L), new_ym(1L))
+})
+
+test_that("retains names", {
+  expect_named(as_ym(set_names(1L, "x")), "x")
+})
+
+# ------------------------------------------------------------------------------
+# double -> ym
+
+test_that("can force", {
+  expect_identical(as_ym(1), new_ym(1L))
+})
+
+test_that("retains names", {
+  expect_named(as_ym(set_names(1, "x")), "x")
+})
+
+test_that("cannot have lossy double to integer conversion", {
+  expect_error(as_ym(1.5), class = "vctrs_error_cast_lossy")
+})
+
+# ------------------------------------------------------------------------------
 # ym -> Date
 
 test_that("dots are checked", {
