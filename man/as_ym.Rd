@@ -2,9 +2,27 @@
 % Please edit documentation in R/ym-as.R
 \name{as_ym}
 \alias{as_ym}
+\alias{as_ym.Date}
+\alias{as_ym.POSIXct}
+\alias{as_ym.POSIXlt}
+\alias{as_ym.integer}
+\alias{as_ym.double}
+\alias{as_ym.character}
 \title{Coerce to year month}
 \usage{
 as_ym(x, ...)
+
+\method{as_ym}{Date}(x, ...)
+
+\method{as_ym}{POSIXct}(x, ...)
+
+\method{as_ym}{POSIXlt}(x, ...)
+
+\method{as_ym}{integer}(x, ...)
+
+\method{as_ym}{double}(x, ...)
+
+\method{as_ym}{character}(x, format = "\%Y-\%m", ...)
 }
 \arguments{
 \item{x}{\verb{[vector]}
@@ -12,17 +30,46 @@ as_ym(x, ...)
 An object to coerce to ym.}
 
 \item{...}{Not used.}
+
+\item{format}{\verb{[character(1)]}
+
+A format to parse character input with. Should generally only consist
+of format tokens related to year or month. Common formats are \code{"\%Y-\%m"},
+\code{"\%b \%Y"}, and \code{"\%Y \%b"}.}
 }
 \description{
-Coerce a vector to ym. Supports a range of types including:
 \itemize{
-\item Date
-\item POSIXct
-\item POSIXlt
+\item Date, POSIXct, and POSIXlt are converted directly by extracting the year
+and month from \code{x}. Any day, hour, minute, or second components are
+dropped. Time zone information is not retained.
+\item Integer and double input are assumed to be the number of months since the
+Unix origin of 1970-01-01.
+\item Character input is assumed to be provided in a format containing only
+information about the year and month, such as \code{"1970-01"} or \code{"Jan 1970"}.
+The default format is \code{"\%Y-\%m"}, but this can be altered.
+}
+}
+\details{
+When parsing character input, internally:
+\itemize{
+\item \code{"-\%d"} is appended to the \code{format}, and \code{"-01"} is appended to \code{x}.
+\item An attempt to parse as a Date is then made.
+\item The resulting Date is converted to ym, with a warning if any input failed
+to parse. Failures result in \code{NA}.
 }
 }
 \examples{
 # Extra information such as days, hours, or time zones are dropped
 as_ym(as.Date("2019-05-03"))
 as_ym(as.POSIXct("2019-03-04 01:01:01", tz = "America/New_York"))
+
+# Integers are interpreted as the number of months since 1970-01-01
+as_ym(0L)
+as_ym(12L)
+
+as_ym("1970-01")
+as_ym("1970 Jan", format = "\%Y \%b")
+
+# Unparseable input results in `NA`, with a warning
+try(as_ym(c("1970-00", "1970-01")))
 }

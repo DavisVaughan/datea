@@ -1,15 +1,36 @@
 #' Coerce to year month
 #'
 #' @description
-#' Coerce a vector to ym. Supports a range of types including:
+#' - Date, POSIXct, and POSIXlt are converted directly by extracting the year
+#'   and month from `x`. Any day, hour, minute, or second components are
+#'   dropped. Time zone information is not retained.
 #'
-#' - Date
-#' - POSIXct
-#' - POSIXlt
+#' - Integer and double input are assumed to be the number of months since the
+#'   Unix origin of 1970-01-01.
+#'
+#' - Character input is assumed to be provided in a format containing only
+#'   information about the year and month, such as `"1970-01"` or `"Jan 1970"`.
+#'   The default format is `"%Y-%m"`, but this can be altered.
+#'
+#' @details
+#' When parsing character input, internally:
+#'
+#' - `"-%d"` is appended to the `format`, and `"-01"` is appended to `x`.
+#'
+#' - An attempt to parse as a Date is then made.
+#'
+#' - The resulting Date is converted to ym, with a warning if any input failed
+#'   to parse. Failures result in `NA`.
 #'
 #' @param x `[vector]`
 #'
 #'   An object to coerce to ym.
+#'
+#' @param format `[character(1)]`
+#'
+#'   A format to parse character input with. Should generally only consist
+#'   of format tokens related to year or month. Common formats are `"%Y-%m"`,
+#'   `"%b %Y"`, and `"%Y %b"`.
 #'
 #' @param ...
 #'
@@ -20,6 +41,16 @@
 #' # Extra information such as days, hours, or time zones are dropped
 #' as_ym(as.Date("2019-05-03"))
 #' as_ym(as.POSIXct("2019-03-04 01:01:01", tz = "America/New_York"))
+#'
+#' # Integers are interpreted as the number of months since 1970-01-01
+#' as_ym(0L)
+#' as_ym(12L)
+#'
+#' as_ym("1970-01")
+#' as_ym("1970 Jan", format = "%Y %b")
+#'
+#' # Unparseable input results in `NA`, with a warning
+#' try(as_ym(c("1970-00", "1970-01")))
 as_ym <- function(x, ...) {
   UseMethod("as_ym")
 }
@@ -38,6 +69,7 @@ as_ym.ym <- function(x, ...) {
   x
 }
 
+#' @rdname as_ym
 #' @export
 as_ym.Date <- function(x, ...) {
   if (!missing(...)) ellipsis::check_dots_empty()
@@ -52,6 +84,7 @@ force_to_ym_from_date <- function(x) {
   out
 }
 
+#' @rdname as_ym
 #' @export
 as_ym.POSIXct <- function(x, ...) {
   if (!missing(...)) ellipsis::check_dots_empty()
@@ -70,6 +103,7 @@ force_to_ym_from_posixt <- function(x) {
   out
 }
 
+#' @rdname as_ym
 #' @export
 as_ym.POSIXlt <- function(x, ...) {
   if (!missing(...)) ellipsis::check_dots_empty()
@@ -86,12 +120,14 @@ force_to_ym_from_posixlt <- function(x) {
   out
 }
 
+#' @rdname as_ym
 #' @export
 as_ym.integer <- function(x, ...) {
   if (!missing(...)) ellipsis::check_dots_empty()
   new_ym(x)
 }
 
+#' @rdname as_ym
 #' @export
 as_ym.double <- function(x, ...) {
   if (!missing(...)) ellipsis::check_dots_empty()
@@ -105,6 +141,7 @@ as_ym.double <- function(x, ...) {
   out
 }
 
+#' @rdname as_ym
 #' @export
 as_ym.character <- function(x, format = "%Y-%m", ...) {
   if (!missing(...)) ellipsis::check_dots_empty()
