@@ -40,10 +40,16 @@
 
 
 <meta property="og:title" content="Coerce to year month — as_ym" />
-<meta property="og:description" content="Coerce a vector to ym. Supports a range of types including:
-Date
-POSIXct
-POSIXlt
+<meta property="og:description" content="
+
+Date, POSIXct, and POSIXlt are converted directly by extracting the year
+and month from x. Any day, hour, minute, or second components are
+dropped. Time zone information is not retained.
+Integer and double input are assumed to be the number of months since the
+Unix origin of 1970-01-01.
+Character input is assumed to be provided in a format containing only
+information about the year and month, such as &quot;1970-01&quot; or &quot;Jan 1970&quot;.
+It is parsed using the defaults of ym_parse().
 
 " />
 
@@ -119,15 +125,39 @@ POSIXlt
     </div>
 
     <div class="ref-description">
-    <p>Coerce a vector to ym. Supports a range of types including:</p><ul>
-<li><p>Date</p></li>
-<li><p>POSIXct</p></li>
-<li><p>POSIXlt</p></li>
+    
+<ul>
+<li><p>Date, POSIXct, and POSIXlt are converted directly by extracting the year
+and month from <code>x</code>. Any day, hour, minute, or second components are
+dropped. Time zone information is not retained.</p></li>
+<li><p>Integer and double input are assumed to be the number of months since the
+Unix origin of 1970-01-01.</p></li>
+<li><p>Character input is assumed to be provided in a format containing only
+information about the year and month, such as <code>"1970-01"</code> or <code>"Jan 1970"</code>.
+It is parsed using the defaults of <code><a href='ym_parse.html'>ym_parse()</a></code>.</p></li>
 </ul>
 
     </div>
 
-    <pre class="usage"><span class='fu'>as_ym</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>as_ym</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for Date</span>
+<span class='fu'>as_ym</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for POSIXct</span>
+<span class='fu'>as_ym</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for POSIXlt</span>
+<span class='fu'>as_ym</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for integer</span>
+<span class='fu'>as_ym</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for double</span>
+<span class='fu'>as_ym</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for character</span>
+<span class='fu'>as_ym</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -148,7 +178,11 @@ POSIXlt
     <pre class="examples"><div class='input'><span class='co'># Extra information such as days, hours, or time zones are dropped</span>
 <span class='fu'>as_ym</span>(<span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span>(<span class='st'>"2019-05-03"</span>))</div><div class='output co'>#&gt; &lt;ym[1]&gt;
 #&gt; [1] 2019-05</div><div class='input'><span class='fu'>as_ym</span>(<span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span>(<span class='st'>"2019-03-04 01:01:01"</span>, <span class='kw'>tz</span> <span class='kw'>=</span> <span class='st'>"America/New_York"</span>))</div><div class='output co'>#&gt; &lt;ym[1]&gt;
-#&gt; [1] 2019-03</div></pre>
+#&gt; [1] 2019-03</div><div class='input'>
+<span class='co'># Integers are interpreted as the number of months since 1970-01-01</span>
+<span class='fu'>as_ym</span>(<span class='fl'>0L</span>)</div><div class='output co'>#&gt; &lt;ym[1]&gt;
+#&gt; [1] 1970-01</div><div class='input'><span class='fu'>as_ym</span>(<span class='fl'>12L</span>)</div><div class='output co'>#&gt; &lt;ym[1]&gt;
+#&gt; [1] 1971-01</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
