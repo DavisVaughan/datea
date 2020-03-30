@@ -54,6 +54,10 @@ test_that("ym can be `NA`", {
   expect_length(new_ym(NA_integer_), 1L)
 })
 
+test_that("names are retained", {
+  expect_named(new_ym(c(x = 1L)), "x")
+})
+
 # ------------------------------------------------------------------------------
 # is
 
