@@ -124,6 +124,10 @@ force_to_ym_from_posixlt <- function(x) {
 #' @export
 as_ym.integer <- function(x, ...) {
   if (!missing(...)) ellipsis::check_dots_empty()
+  force_to_ym_from_integer(x)
+}
+
+force_to_ym_from_integer <- function(x) {
   new_ym(x)
 }
 
@@ -131,7 +135,10 @@ as_ym.integer <- function(x, ...) {
 #' @export
 as_ym.double <- function(x, ...) {
   if (!missing(...)) ellipsis::check_dots_empty()
+  force_to_ym_from_double(x)
+}
 
+force_to_ym_from_double <- function(x) {
   out <- vec_cast(x, integer())
   out <- new_ym(out)
 
@@ -145,7 +152,10 @@ as_ym.double <- function(x, ...) {
 #' @export
 as_ym.character <- function(x, format = "%Y-%m", ...) {
   if (!missing(...)) ellipsis::check_dots_empty()
+  force_to_ym_from_character(x, format)
+}
 
+force_to_ym_from_character <- function(x, format) {
   if (!is_character(format) || length(format) != 1L) {
     abort("`format` must be a string.")
   }
