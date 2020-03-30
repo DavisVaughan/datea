@@ -1,6 +1,3 @@
-# TODO:
-# as_ym.character()
-
 #' Coerce to year month
 #'
 #' @description
@@ -24,26 +21,26 @@
 #' as_ym(as.Date("2019-05-03"))
 #' as_ym(as.POSIXct("2019-03-04 01:01:01", tz = "America/New_York"))
 as_ym <- function(x, ...) {
-  if (!missing(...)) {
-    ellipsis::check_dots_empty()
-  }
-
   UseMethod("as_ym")
 }
 
 #' @export
 as_ym.default <- function(x, ...) {
+  if (!missing(...)) ellipsis::check_dots_empty()
+
   class <- class_collapse(x)
   abort(paste0("Can't convert a <", class, "> to a <ym>."))
 }
 
 #' @export
 as_ym.ym <- function(x, ...) {
+  if (!missing(...)) ellipsis::check_dots_empty()
   x
 }
 
 #' @export
 as_ym.Date <- function(x, ...) {
+  if (!missing(...)) ellipsis::check_dots_empty()
   force_to_ym_from_date(x)
 }
 
@@ -57,6 +54,7 @@ force_to_ym_from_date <- function(x) {
 
 #' @export
 as_ym.POSIXct <- function(x, ...) {
+  if (!missing(...)) ellipsis::check_dots_empty()
   force_to_ym_from_posixct(x)
 }
 
@@ -74,6 +72,7 @@ force_to_ym_from_posixt <- function(x) {
 
 #' @export
 as_ym.POSIXlt <- function(x, ...) {
+  if (!missing(...)) ellipsis::check_dots_empty()
   force_to_ym_from_posixlt(x)
 }
 
@@ -89,11 +88,14 @@ force_to_ym_from_posixlt <- function(x) {
 
 #' @export
 as_ym.integer <- function(x, ...) {
+  if (!missing(...)) ellipsis::check_dots_empty()
   new_ym(x)
 }
 
 #' @export
 as_ym.double <- function(x, ...) {
+  if (!missing(...)) ellipsis::check_dots_empty()
+
   out <- vec_cast(x, integer())
   out <- new_ym(out)
 
@@ -101,6 +103,73 @@ as_ym.double <- function(x, ...) {
   names(out) <- names(x)
 
   out
+}
+
+#' @export
+as_ym.character <- function(x, format = "%Y-%m", ...) {
+  if (!missing(...)) ellipsis::check_dots_empty()
+
+  if (!is_character(format) || length(format) != 1L) {
+    abort("`format` must be a string.")
+  }
+
+  # Avoid bad behavior of `paste()` with zero length input
+  if (length(x) == 0L) {
+    out <- new_ym()
+    names(out) <- names(x)
+    return(out)
+  }
+
+  # Unambiguously append a `-01`, assuming that the user has provided ONLY
+  # the year and month in some format
+  format <- paste0(format, "-%d")
+  out <- paste0(x, "-01")
+
+  out <- as.Date(out, format = format, origin = timeclass_global_origin_date)
+  out <- force_to_ym_from_date(out)
+
+  new_na_detected <- is.na(out) & !is.na(x)
+  if (any(new_na_detected)) {
+    locations <- which(new_na_detected)
+    warn_lossy_parse(locations)
+  }
+
+  names(out) <- names(x)
+
+  out
+}
+
+warn_lossy_parse <- function(locations) {
+  if (length(locations) > 5) {
+    locations <- c(locations[1:5], "etc.")
+    full_stop <- ""
+  } else {
+    full_stop <- "."
+  }
+
+  if (length(locations) == 1L) {
+    chr_location <- "location"
+    chr_where <- "that location"
+  } else {
+    chr_location <- "locations"
+    chr_where <- "those locations"
+  }
+
+  locations <- paste0(locations, collapse = ", ")
+
+  message <- paste0(
+    "Unable to parse to year month at ",
+    chr_location,
+    " ",
+    locations,
+    full_stop,
+    " ",
+    "Returning `NA` at ",
+    chr_where,
+    "."
+  )
+
+  warn(message)
 }
 
 # ------------------------------------------------------------------------------

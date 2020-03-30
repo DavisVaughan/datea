@@ -103,6 +103,40 @@ test_that("cannot have lossy double to integer conversion", {
 })
 
 # ------------------------------------------------------------------------------
+# character -> ym
+
+test_that("can force", {
+  expect_identical(as_ym("1970-01"), new_ym(0L))
+})
+
+test_that("retains names", {
+  expect_named(as_ym(set_names("1970-01", "x")), "x")
+})
+
+test_that("various formats work", {
+  expect_identical(as_ym("1-1"), ym(1, 1))
+  expect_identical(as_ym("0001-1"), ym(1, 1))
+})
+
+test_that("can alter the format", {
+  expect_identical(as_ym("1970 Jan", format = "%Y %b"), new_ym(0L))
+})
+
+test_that("`NA` parses fine", {
+  expect_identical(as_ym(NA_character_), new_ym(NA_integer_))
+})
+
+test_that("empty character parses", {
+  expect_identical(as_ym(character()), new_ym(integer()))
+})
+
+test_that("character force throws warnings on failure to parse", {
+  expect_identical(expect_warning(as_ym("1970")), new_ym(NA_integer_))
+  expect_identical(expect_warning(as_ym(c(rep("1970", 2), "1970-01", "1970"))), new_ym(c(NA_integer_, NA_integer_, 0L, NA_integer_)))
+  expect_identical(expect_warning(as_ym(rep("1970", 6))), new_ym(rep(NA_integer_, 6)))
+})
+
+# ------------------------------------------------------------------------------
 # ym -> Date
 
 test_that("dots are checked", {
@@ -235,5 +269,10 @@ test_that("`as_ym()` gives informative errors", {
   verify_output(test_path("errors", "test-ym-as.txt"), {
     "# default method collapses classes"
     as_ym(ordered(factor("x")))
+
+    "# character force throws warnings on failure to parse"
+    as_ym("1970")
+    as_ym(c(rep("1970", 2), "1970-01", "1970"))
+    as_ym(rep("1970", 6))
   })
 })

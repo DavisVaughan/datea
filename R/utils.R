@@ -3,6 +3,7 @@
 
 delayedAssign("timeclass_global_empty_ym", new_ym())
 delayedAssign("timeclass_global_empty_date", new_date())
+delayedAssign("timeclass_global_origin_date", new_date(0))
 
 # ------------------------------------------------------------------------------
 
