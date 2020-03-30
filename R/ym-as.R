@@ -57,7 +57,7 @@ as_ym <- function(x, ...) {
 
 #' @export
 as_ym.default <- function(x, ...) {
-  if (!missing(...)) ellipsis::check_dots_empty()
+  ellipsis::check_dots_empty()
 
   class <- class_collapse(x)
   abort(paste0("Can't convert a <", class, "> to a <ym>."))
@@ -65,14 +65,14 @@ as_ym.default <- function(x, ...) {
 
 #' @export
 as_ym.ym <- function(x, ...) {
-  if (!missing(...)) ellipsis::check_dots_empty()
+  ellipsis::check_dots_empty()
   x
 }
 
 #' @rdname as_ym
 #' @export
 as_ym.Date <- function(x, ...) {
-  if (!missing(...)) ellipsis::check_dots_empty()
+  ellipsis::check_dots_empty()
   force_to_ym_from_date(x)
 }
 
@@ -87,7 +87,7 @@ force_to_ym_from_date <- function(x) {
 #' @rdname as_ym
 #' @export
 as_ym.POSIXct <- function(x, ...) {
-  if (!missing(...)) ellipsis::check_dots_empty()
+  ellipsis::check_dots_empty()
   force_to_ym_from_posixct(x)
 }
 
@@ -106,7 +106,7 @@ force_to_ym_from_posixt <- function(x) {
 #' @rdname as_ym
 #' @export
 as_ym.POSIXlt <- function(x, ...) {
-  if (!missing(...)) ellipsis::check_dots_empty()
+  ellipsis::check_dots_empty()
   force_to_ym_from_posixlt(x)
 }
 
@@ -123,7 +123,7 @@ force_to_ym_from_posixlt <- function(x) {
 #' @rdname as_ym
 #' @export
 as_ym.integer <- function(x, ...) {
-  if (!missing(...)) ellipsis::check_dots_empty()
+  ellipsis::check_dots_empty()
   force_to_ym_from_integer(x)
 }
 
@@ -134,7 +134,7 @@ force_to_ym_from_integer <- function(x) {
 #' @rdname as_ym
 #' @export
 as_ym.double <- function(x, ...) {
-  if (!missing(...)) ellipsis::check_dots_empty()
+  ellipsis::check_dots_empty()
   force_to_ym_from_double(x)
 }
 
@@ -151,7 +151,7 @@ force_to_ym_from_double <- function(x) {
 #' @rdname as_ym
 #' @export
 as_ym.character <- function(x, format = "%Y-%m", ...) {
-  if (!missing(...)) ellipsis::check_dots_empty()
+  ellipsis::check_dots_empty()
   force_to_ym_from_character(x, format)
 }
 
