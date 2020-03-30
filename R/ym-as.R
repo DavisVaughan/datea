@@ -58,7 +58,6 @@ as_ym <- function(x, ...) {
 #' @export
 as_ym.default <- function(x, ...) {
   ellipsis::check_dots_empty()
-
   class <- class_collapse(x)
   abort(paste0("Can't convert a <", class, "> to a <ym>."))
 }
@@ -223,10 +222,7 @@ warn_lossy_parse <- function(locations) {
 
 #' @export
 as.Date.ym <- function(x, ...) {
-  if (!missing(...)) {
-    ellipsis::check_dots_empty()
-  }
-
+  ellipsis::check_dots_empty()
   force_to_date_from_ym(x)
 }
 
@@ -242,10 +238,7 @@ force_to_date_from_ym <- function(x) {
 
 #' @export
 as.POSIXct.ym <- function(x, tz = "UTC", ...) {
-  if (!missing(...)) {
-    ellipsis::check_dots_empty()
-  }
-
+  ellipsis::check_dots_empty()
   force_to_posixct_from_ym(x, tz)
 }
 
@@ -270,10 +263,7 @@ force_to_posixt_from_ym <- function(x, tz, posixct) {
 
 #' @export
 as.POSIXlt.ym <- function(x, tz = "UTC", ...) {
-  if (!missing(...)) {
-    ellipsis::check_dots_empty()
-  }
-
+  ellipsis::check_dots_empty()
   force_to_posixlt_from_ym(x, tz)
 }
 
@@ -285,10 +275,7 @@ force_to_posixlt_from_ym <- function(x, tz) {
 
 #' @export
 as.character.ym <- function(x, ...) {
-  if (!missing(...)) {
-    ellipsis::check_dots_empty()
-  }
-
+  ellipsis::check_dots_empty()
   force_to_character_from_ym(x)
 }
 
@@ -328,10 +315,7 @@ force_to_character_from_ym <- function(x) {
 
 #' @export
 as.integer.ym <- function(x, ...) {
-  if (!missing(...)) {
-    ellipsis::check_dots_empty()
-  }
-
+  ellipsis::check_dots_empty()
   force_to_integer_from_ym(x)
 }
 
@@ -343,10 +327,7 @@ force_to_integer_from_ym <- function(x) {
 
 #' @export
 as.double.ym <- function(x, ...) {
-  if (!missing(...)) {
-    ellipsis::check_dots_empty()
-  }
-
+  ellipsis::check_dots_empty()
   force_to_double_from_ym(x)
 }
 
