@@ -16,8 +16,6 @@
 \item{to}{Type to cast to.}
 
 \item{...}{Used to pass along error message information.}
-
-\item{op}{An arithmetic operator as a string.}
 }
 \value{
 See the corresponding vctrs function for the exact return value.
