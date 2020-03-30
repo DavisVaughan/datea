@@ -40,7 +40,12 @@
 
 
 <meta property="og:title" content="Coerce to year month — as_ym" />
-<meta property="og:description" content="Coerce to year month" />
+<meta property="og:description" content="Coerce a vector to ym. Supports a range of types including:
+Date
+POSIXct
+POSIXlt
+
+" />
 
 
 
@@ -114,7 +119,12 @@
     </div>
 
     <div class="ref-description">
-    <p>Coerce to year month</p>
+    <p>Coerce a vector to ym. Supports a range of types including:</p><ul>
+<li><p>Date</p></li>
+<li><p>POSIXct</p></li>
+<li><p>POSIXlt</p></li>
+</ul>
+
     </div>
 
     <pre class="usage"><span class='fu'>as_ym</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
@@ -134,6 +144,11 @@
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># Extra information such as days, hours, or time zones are dropped</span>
+<span class='fu'>as_ym</span>(<span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span>(<span class='st'>"2019-05-03"</span>))</div><div class='output co'>#&gt; &lt;ym[1]&gt;
+#&gt; [1] 2019-05</div><div class='input'><span class='fu'>as_ym</span>(<span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span>(<span class='st'>"2019-03-04 01:01:01"</span>, <span class='kw'>tz</span> <span class='kw'>=</span> <span class='st'>"America/New_York"</span>))</div><div class='output co'>#&gt; &lt;ym[1]&gt;
+#&gt; [1] 2019-03</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
