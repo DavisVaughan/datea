@@ -7,6 +7,8 @@
 
 [![R build
 status](https://github.com/DavisVaughan/timeclass/workflows/R-CMD-check/badge.svg)](https://github.com/DavisVaughan/timeclass/actions)
+[![Codecov test
+coverage](https://codecov.io/gh/DavisVaughan/timeclass/branch/master/graph/badge.svg)](https://codecov.io/gh/DavisVaughan/timeclass?branch=master)
 <!-- badges: end -->
 
 Additional time-related S3 classes for R.
