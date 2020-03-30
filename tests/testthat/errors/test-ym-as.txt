@@ -1,0 +1,7 @@
+
+default method collapses classes
+================================
+
+> as_ym(ordered(factor("x")))
+Error: Can't convert a <ordered/factor> to a <ym>.
+

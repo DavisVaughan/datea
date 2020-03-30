@@ -14,5 +14,15 @@ An object to coerce to ym.}
 \item{...}{Not used.}
 }
 \description{
-Coerce to year month
+Coerce a vector to ym. Supports a range of types including:
+\itemize{
+\item Date
+\item POSIXct
+\item POSIXlt
+}
+}
+\examples{
+# Extra information such as days, hours, or time zones are dropped
+as_ym(as.Date("2019-05-03"))
+as_ym(as.POSIXct("2019-03-04 01:01:01", tz = "America/New_York"))
 }

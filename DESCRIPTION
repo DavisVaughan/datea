@@ -15,7 +15,8 @@ BugReports: https://github.com/DavisVaughan/timeclass/issues
 Imports:
     rlang,
     vctrs (>= 0.2.99.9010),
-    warp
+    warp,
+    ellipsis
 Suggests: 
     testthat (>= 2.1.0),
     covr
