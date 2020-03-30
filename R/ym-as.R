@@ -102,6 +102,7 @@ as.Date.ym <- function(x, ...) {
 
 force_to_date_from_ym <- function(x) {
   out <- months_to_days(x)
+  out <- as.double(out)
   out <- new_date(out)
   names(out) <- names(x)
   out

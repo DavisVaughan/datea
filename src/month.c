@@ -12,8 +12,8 @@ static inline int months_to_days_impl(int months);
 static SEXP months_to_days(SEXP x) {
   R_xlen_t size = Rf_xlength(x);
 
-  SEXP out = PROTECT(Rf_allocVector(REALSXP, size));
-  double* p_out = REAL(out);
+  SEXP out = PROTECT(Rf_allocVector(INTSXP, size));
+  int* p_out = INTEGER(out);
 
   int* p_x = INTEGER(x);
 
@@ -21,7 +21,7 @@ static SEXP months_to_days(SEXP x) {
     int elt = p_x[i];
 
     if (elt == NA_INTEGER) {
-      p_out[i] = NA_REAL;
+      p_out[i] = NA_INTEGER;
       continue;
     }
 

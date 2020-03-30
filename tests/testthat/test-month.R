@@ -7,6 +7,7 @@ test_that("results are correct by brute force comparison", {
 
   expect <- seq.Date(from, to, by = "1 month")
   expect <- unclass(expect)
+  expect <- as.integer(expect)
 
   expect_identical(x, expect)
 })
