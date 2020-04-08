@@ -27,7 +27,7 @@ vec_ptype2.ym <- function(x, y, ...) {
 
 #' @method vec_ptype2.ym ym
 #' @export
-vec_ptype2.ym.ym <- function(x, y, ..., x_arg = "x", y_arg = "y") {
+vec_ptype2.ym.ym <- function(x, y, ..., x_arg = "", y_arg = "") {
   timeclass_global_empty_ym
 }
 
@@ -35,13 +35,13 @@ vec_ptype2.ym.ym <- function(x, y, ..., x_arg = "x", y_arg = "y") {
 
 #' @method vec_ptype2.ym Date
 #' @export
-vec_ptype2.ym.Date <- function(x, y, ..., x_arg = "x", y_arg = "y") {
+vec_ptype2.ym.Date <- function(x, y, ..., x_arg = "", y_arg = "") {
   timeclass_global_empty_date
 }
 
 #' @method vec_ptype2.Date ym
 #' @export
-vec_ptype2.Date.ym <- function(x, y, ..., x_arg = "x", y_arg = "y") {
+vec_ptype2.Date.ym <- function(x, y, ..., x_arg = "", y_arg = "") {
   timeclass_global_empty_date
 }
 
@@ -49,13 +49,13 @@ vec_ptype2.Date.ym <- function(x, y, ..., x_arg = "x", y_arg = "y") {
 
 #' @method vec_ptype2.ym POSIXct
 #' @export
-vec_ptype2.ym.POSIXct <- function(x, y, ..., x_arg = "x", y_arg = "y") {
+vec_ptype2.ym.POSIXct <- function(x, y, ..., x_arg = "", y_arg = "") {
   new_datetime(tzone = tzone(y))
 }
 
 #' @method vec_ptype2.POSIXct ym
 #' @export
-vec_ptype2.POSIXct.ym <- function(x, y, ..., x_arg = "x", y_arg = "y") {
+vec_ptype2.POSIXct.ym <- function(x, y, ..., x_arg = "", y_arg = "") {
   new_datetime(tzone = tzone(x))
 }
 
@@ -63,13 +63,13 @@ vec_ptype2.POSIXct.ym <- function(x, y, ..., x_arg = "x", y_arg = "y") {
 
 #' @method vec_ptype2.ym POSIXlt
 #' @export
-vec_ptype2.ym.POSIXlt <- function(x, y, ..., x_arg = "x", y_arg = "y") {
+vec_ptype2.ym.POSIXlt <- function(x, y, ..., x_arg = "", y_arg = "") {
   new_datetime(tzone = tzone(y))
 }
 
 #' @method vec_ptype2.POSIXlt ym
 #' @export
-vec_ptype2.POSIXlt.ym <- function(x, y, ..., x_arg = "x", y_arg = "y") {
+vec_ptype2.POSIXlt.ym <- function(x, y, ..., x_arg = "", y_arg = "") {
   new_datetime(tzone = tzone(x))
 }
 
