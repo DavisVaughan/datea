@@ -2,8 +2,8 @@
 # default
 
 test_that("default method throws errors", {
-  expect_error(vec_cast(new_ym(), 1), class = "vctrs_error_incompatible_cast")
-  expect_error(vec_cast(1, new_ym()), class = "vctrs_error_incompatible_cast")
+  expect_error(vec_cast(new_ym(), 1), class = "vctrs_error_incompatible_type")
+  expect_error(vec_cast(1, new_ym()), class = "vctrs_error_incompatible_type")
 })
 
 # ------------------------------------------------------------------------------
