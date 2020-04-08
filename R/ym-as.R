@@ -240,7 +240,11 @@ as.integer.ym <- function(x, ...) {
 }
 
 force_to_integer_from_ym <- function(x) {
-  vec_data(x)
+  out <- unclass(x)
+  # Ensures attributes are dropped, but also sadly drops names
+  out <- as.integer(out)
+  names(out) <- names(x)
+  out
 }
 
 # ------------------------------------------------------------------------------
@@ -252,8 +256,8 @@ as.double.ym <- function(x, ...) {
 }
 
 force_to_double_from_ym <- function(x) {
-  out <- force_to_integer_from_ym(x)
-  # `as.double()` purposefully drops names
+  out <- unclass(x)
+  # Ensures attributes are dropped, but also sadly drops names
   out <- as.double(out)
   names(out) <- names(x)
   out
