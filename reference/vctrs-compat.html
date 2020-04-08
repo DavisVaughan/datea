@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>vctrs compatibility functions — vec_cast.ym • timeclass</title>
+<title>vctrs compatibility functions — vec_arith.ym • timeclass</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="vctrs compatibility functions — vec_cast.ym" />
+<meta property="og:title" content="vctrs compatibility functions — vec_arith.ym" />
 <meta property="og:description" content="These functions are the extensions that allow timeclass objects to
 work with vctrs." />
 
@@ -110,7 +110,7 @@ work with vctrs." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>vctrs compatibility functions</h1>
-    <small class="dont-index">Source: <a href='https://github.com/DavisVaughan/timeclass/blob/master/R/ym-vctrs-cast.R'><code>R/ym-vctrs-cast.R</code></a>, <a href='https://github.com/DavisVaughan/timeclass/blob/master/R/ym-vctrs-ptype.R'><code>R/ym-vctrs-ptype.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/DavisVaughan/timeclass/blob/master/R/ym-vctrs-arith.R'><code>R/ym-vctrs-arith.R</code></a>, <a href='https://github.com/DavisVaughan/timeclass/blob/master/R/ym-vctrs-cast.R'><code>R/ym-vctrs-cast.R</code></a>, <a href='https://github.com/DavisVaughan/timeclass/blob/master/R/ym-vctrs-ptype.R'><code>R/ym-vctrs-ptype.R</code></a></small>
     <div class="hidden name"><code>vctrs-compat.Rd</code></div>
     </div>
 
@@ -120,6 +120,9 @@ work with vctrs.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for ym</span>
+<span class='fu'>vec_arith</span>(<span class='no'>op</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for ym</span>
 <span class='fu'>vec_cast</span>(<span class='no'>x</span>, <span class='no'>to</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for ym</span>
@@ -129,16 +132,20 @@ work with vctrs.</p>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>op</th>
+      <td><p>An arithmetic operator as a string.</p></td>
+    </tr>
+    <tr>
       <th>x, y</th>
       <td><p>Objects.</p></td>
     </tr>
     <tr>
-      <th>to</th>
-      <td><p>Type to cast to.</p></td>
-    </tr>
-    <tr>
       <th>...</th>
       <td><p>Used to pass along error message information.</p></td>
+    </tr>
+    <tr>
+      <th>to</th>
+      <td><p>Type to cast to.</p></td>
     </tr>
     </table>
 
