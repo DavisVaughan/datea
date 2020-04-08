@@ -10,13 +10,9 @@ test_that("NA are formatted as character strings", {
   expect_identical(format(new_ym(NA_integer_)), "NA")
 })
 
-test_that("can format with different codes", {
-  expect_identical(format(new_ym(1L), format = "%b %Y"), "Feb 1970")
-})
-
-test_that("known error when formatting outside the range of 0:9999", {
-  expect_error(format(ym(-1, 1)))
-  expect_error(format(ym(10000, 1)))
+test_that("can format outside the range of 0:9999", {
+  expect_identical(format(ym(-1, 1)), "-0001-01")
+  expect_identical(format(ym(10000, 1)), "10000-01")
 })
 
 # ------------------------------------------------------------------------------

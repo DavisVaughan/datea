@@ -1,18 +1,18 @@
 #' @export
-format.ym <- function(x, format = "%Y-%m", ...) {
+format.ym <- function(x, ...) {
   if (!missing(...)) {
     ellipsis::check_dots_empty()
   }
 
-  x_lt <- as.POSIXlt(x)
-
-  out <- format(x_lt, format = format, usetz = FALSE)
+  x <- force_to_character_from_ym(x)
 
   # Don't use `NA_character_`, as `obj_print_data.default()` will use
   # `print(quote = FALSE)` which prints it as `<NA>`
-  out[is.na(x)] <- "NA"
+  if (anyNA(x)) {
+    x[is.na(x)] <- "NA"
+  }
 
-  out
+  x
 }
 
 #' @export
