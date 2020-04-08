@@ -73,7 +73,10 @@ any_oob_month <- function(month) {
 #' new_ym(0L)
 #' new_ym(100L)
 new_ym <- function(x = integer()) {
-  vec_assert(x, ptype = integer())
+  # `vec_assert()` is slow, avoid unless we need it for nice error messages
+  if (!is_integer(x)) {
+    vec_assert(x, integer())
+  }
 
   out <- new_vctr(x, class = "ym", inherit_base_type = FALSE)
 
