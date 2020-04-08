@@ -20,7 +20,8 @@ Imports:
     glue
 Suggests: 
     testthat (>= 2.1.0),
-    covr
+    covr,
+    lubridate
 Remotes:
     r-lib/vctrs
 Encoding: UTF-8
