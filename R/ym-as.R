@@ -222,7 +222,9 @@ force_to_character_from_ym <- function(x) {
 
   out <- paste(out_year, out_month, sep = "-")
 
-  out[is.na(x)] <- NA_character_
+  if (anyNA(x)) {
+    out[is.na(x)] <- NA_character_
+  }
 
   names(out) <- names(x)
 
