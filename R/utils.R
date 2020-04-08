@@ -14,3 +14,18 @@ tzone <- function(x) {
 class_collapse <- function(x) {
   paste0(class(x), collapse = "/")
 }
+
+is_one_dim <- function(x) {
+  # Bypass `dim()` dispatch (for data frames)
+  dim <- attr(x, "dim", exact = TRUE)
+
+  if (is.null(dim)) {
+    return(TRUE)
+  }
+
+  if (length(dim) == 1L) {
+    return(TRUE)
+  }
+
+  FALSE
+}

@@ -5,6 +5,7 @@
 #'
 #' @param x,y Objects.
 #' @param to Type to cast to.
+#' @param op An arithmetic operator as a string.
 #' @param ... Used to pass along error message information.
 #'
 #' @return
