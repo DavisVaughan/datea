@@ -103,3 +103,47 @@ new_ym <- function(x = integer()) {
 is_ym <- function(x) {
   inherits(x, "ym")
 }
+
+# ------------------------------------------------------------------------------
+
+#' Accessors
+#'
+#' @description
+#' - `ym_year()` returns the ym year.
+#'
+#' - `ym_month()` returns the ym month.
+#'
+#' @param x `[ym]`
+#'
+#'   A ym object.
+#'
+#' @name ym-accessors
+#'
+#' @examples
+#' x <- ym(
+#'   year = c(2000, NA, 2001),
+#'   month = c(1, 2, 3)
+#' )
+#'
+#' ym_year(x)
+NULL
+
+#' @rdname ym-accessors
+#' @export
+ym_year <- function(x) {
+  if (!is_ym(x)) {
+    stop_requires_ym(x)
+  }
+
+  months_to_year(x)
+}
+
+#' @rdname ym-accessors
+#' @export
+ym_month <- function(x) {
+  if (!is_ym(x)) {
+    stop_requires_ym(x)
+  }
+
+  months_to_month(x)
+}

@@ -1,0 +1,10 @@
+
+accessors errors on non-ym objects
+==================================
+
+> ym_year(1)
+Error: `x` must be a <ym>, not a <numeric>.
+
+> ym_month(1)
+Error: `x` must be a <ym>, not a <numeric>.
+

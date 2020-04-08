@@ -70,3 +70,40 @@ test_that("can recognize ym() objects", {
 test_that("ym() objects are technically seen as numeric", {
   expect_true(is.numeric(new_ym()))
 })
+
+# ------------------------------------------------------------------------------
+# accessors
+
+test_that("accessors errors on non-ym objects", {
+  expect_error(ym_year(1))
+  expect_error(ym_month(1))
+})
+
+test_that("can access components", {
+  x <- ym(c(2000, 2001), c(1, 2))
+  expect_identical(ym_year(x), c(2000L, 2001L))
+  expect_identical(ym_month(x), c(1L, 2L))
+})
+
+test_that("NA propagates", {
+  x <- new_ym(NA_integer_)
+  expect_identical(ym_year(x), NA_integer_)
+  expect_identical(ym_month(x), NA_integer_)
+})
+
+test_that("names are not carried along", {
+  x <- set_names(new_ym(0L), "x")
+  expect_named(ym_year(x), NULL)
+  expect_named(ym_month(x), NULL)
+})
+
+# ------------------------------------------------------------------------------
+
+test_that("ym helpers have informative output", {
+  verify_output(test_path("errors", "test-ym.txt"), {
+    "# accessors errors on non-ym objects"
+    ym_year(1)
+    ym_month(1)
+  })
+})
+

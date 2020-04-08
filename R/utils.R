@@ -29,3 +29,12 @@ is_one_dim <- function(x) {
 
   FALSE
 }
+
+glubort <- function(..., .sep = "", .envir = parent.frame()) {
+  abort(glue::glue(..., .sep = .sep, .envir = .envir))
+}
+
+stop_requires_ym <- function(x) {
+  class <- class_collapse(x)
+  glubort("`x` must be a <ym>, not a <{class}>.")
+}

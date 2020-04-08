@@ -16,7 +16,8 @@ Imports:
     rlang,
     vctrs (>= 0.2.99.9011),
     warp,
-    ellipsis
+    ellipsis,
+    glue
 Suggests: 
     testthat (>= 2.1.0),
     covr

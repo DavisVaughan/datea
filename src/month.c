@@ -82,6 +82,74 @@ SEXP timeclass_months_to_year_month(SEXP x) {
   return months_to_year_month(x);
 }
 
+
+static SEXP months_to_year(SEXP x) {
+  R_xlen_t size = Rf_xlength(x);
+
+  SEXP out = PROTECT(Rf_allocVector(INTSXP, size));
+  int* p_out = INTEGER(out);
+
+  const int* p_x = INTEGER(x);
+
+  for (R_xlen_t i = 0; i < size; ++i) {
+    const int elt = p_x[i];
+
+    if (elt == NA_INTEGER) {
+      p_out[i] = NA_INTEGER;
+      continue;
+    }
+
+    int elt_year;
+    int elt_month;
+
+    months_to_year_month_impl(elt, &elt_year, &elt_month);
+
+    p_out[i] = elt_year;
+  }
+
+  UNPROTECT(1);
+  return out;
+}
+
+// [[ export() ]]
+SEXP timeclass_months_to_year(SEXP x) {
+  return months_to_year(x);
+}
+
+
+static SEXP months_to_month(SEXP x) {
+  R_xlen_t size = Rf_xlength(x);
+
+  SEXP out = PROTECT(Rf_allocVector(INTSXP, size));
+  int* p_out = INTEGER(out);
+
+  const int* p_x = INTEGER(x);
+
+  for (R_xlen_t i = 0; i < size; ++i) {
+    const int elt = p_x[i];
+
+    if (elt == NA_INTEGER) {
+      p_out[i] = NA_INTEGER;
+      continue;
+    }
+
+    int elt_year;
+    int elt_month;
+
+    months_to_year_month_impl(elt, &elt_year, &elt_month);
+
+    p_out[i] = elt_month;
+  }
+
+  UNPROTECT(1);
+  return out;
+}
+
+// [[ export() ]]
+SEXP timeclass_months_to_month(SEXP x) {
+  return months_to_month(x);
+}
+
 // -----------------------------------------------------------------------------
 
 static void divmod(int x, int y, int* p_quot, int* p_rem);
