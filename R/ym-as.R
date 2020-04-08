@@ -165,16 +165,34 @@ force_to_posixct_from_ym <- function(x, tz) {
 }
 
 force_to_posixt_from_ym <- function(x, tz, posixct) {
-  out <- force_to_date_from_ym(x)
-  out <- as.character(out)
+  x <- force_to_date_from_ym(x)
+
+  if (identical(tz, "UTC")) {
+    force_to_utc_from_date(x, posixct)
+  } else {
+    force_to_zoned_from_date(x, tz, posixct)
+  }
+}
+
+force_to_zoned_from_date <- function(x, tz, posixct) {
+  # Going through character is the only way to
+  # retain clock time in the new tz
+  x <- as.character(x)
 
   if (posixct) {
-    out <- as.POSIXct(out, tz = tz)
+    as.POSIXct(x, tz = tz)
   } else {
-    out <- as.POSIXlt(out, tz = tz)
+    as.POSIXlt(x, tz = tz)
   }
+}
 
-  out
+# Much faster than `force_to_zoned_from_date()` for the default case
+force_to_utc_from_date <- function(x, posixct) {
+  if (posixct) {
+    as_utc_posixct_from_date(x)
+  } else {
+    as_utc_posixlt_from_date(x)
+  }
 }
 
 # ------------------------------------------------------------------------------
@@ -261,4 +279,24 @@ force_to_double_from_ym <- function(x) {
   out <- as.double(out)
   names(out) <- names(x)
   out
+}
+
+# ------------------------------------------------------------------------------
+# Helpers
+
+# as.POSIXlt.Date() is unbearably slow, this is much faster.
+# Note that this doesn't handle Dates with fractional days, which
+# should be `trunc(x)`ed towards 0. For our usage, the Date comes
+# from a ym object, so it will never need truncation.
+as_utc_posixlt_from_date <- function(x) {
+  x <- unclass(x)
+  x <- x * timeclass_global_seconds_in_day
+  out <- as.POSIXlt(x, tz = "UTC", origin = timeclass_global_origin_posixct)
+  out
+}
+
+as_utc_posixct_from_date <- function(x) {
+  x <- unclass(x)
+  x <- x * timeclass_global_seconds_in_day
+  structure(x, tzone = "UTC", class = c("POSIXct", "POSIXt"))
 }

@@ -90,12 +90,12 @@ test_that("exact underlying time can be round tripped", {
 
 test_that("safe casts", {
   ym <- new_ym()
-  datetime <- as.POSIXlt(character(), tz = "UTC")
+  datetime <- as.POSIXlt(new_datetime(tzone = "UTC"))
 
   expect_identical(vec_cast(ym, datetime), datetime)
   expect_identical(vec_cast(datetime, ym), ym)
 
-  missing_datetime <- as.POSIXlt(NA_character_, tz = "UTC")
+  missing_datetime <- as.POSIXlt(new_datetime(NA_real_, tzone = "UTC"))
   missing_ym <- new_ym(NA_integer_)
 
   expect_identical(vec_cast(missing_datetime, missing_ym), missing_ym)
@@ -103,7 +103,7 @@ test_that("safe casts", {
 })
 
 test_that("retains names", {
-  datetime <- as.POSIXlt(character(), tz = "UTC")
+  datetime <- as.POSIXlt(new_datetime(tzone = "UTC"))
   expect_named(vec_cast(set_names(new_ym(0L), "x"), datetime), "x")
 
   datetime <- as.POSIXlt("1970-01-01", tz = "UTC")
