@@ -104,3 +104,12 @@ test_that("vec_c() works correctly where c() fails", {
 test_that("vec_proxy() returns input", {
   expect_identical(vec_proxy(new_ymon(1:5)), new_ymon(1:5))
 })
+
+# ------------------------------------------------------------------------------
+
+test_that("methods provide informative output", {
+  verify_output(test_path("output", "test-ymon-methods.txt"), {
+    "# data.frame() containing ymon prints correctly"
+    data.frame(x = new_ymon(1:5))
+  })
+})

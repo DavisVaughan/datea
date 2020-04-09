@@ -1,0 +1,12 @@
+
+data.frame() containing ymon prints correctly
+=============================================
+
+> data.frame(x = new_ymon(1:5))
+        x
+1 1970-02
+2 1970-03
+3 1970-04
+4 1970-05
+5 1970-06
+
