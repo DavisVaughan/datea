@@ -41,6 +41,41 @@ test_that("`[[` works", {
   expect_identical(x[["y"]], new_ym(2L))
 })
 
+test_that("weekdays() works", {
+  expect_identical(weekdays(new_ym(c(NA_integer_, 0L))), c(NA, "Thursday"))
+  expect_identical(weekdays(new_ym(0L), abbreviate = TRUE), "Thu")
+})
+
+test_that("months() works", {
+  expect_identical(months(new_ym(c(NA_integer_, 0L))), c(NA, "January"))
+  expect_identical(months(new_ym(0L), abbreviate = TRUE), "Jan")
+})
+
+test_that("quarters() works", {
+  expect_identical(quarters(new_ym(c(NA_integer_, 0L))), c(NA, "Q1"))
+
+  expect_identical(
+    quarters(new_ym(0:11)),
+    rep(c("Q1", "Q2", "Q3", "Q4"), each = 3)
+  )
+})
+
+test_that("julian() works", {
+  x <- new_ym(c(NA_integer_, 0L, 1L))
+  expect <- structure(c(NA, 0L, 31L), origin = ym(1970, 1))
+  expect_identical(julian(x), expect)
+
+  origin <- ym(1970, 2)
+  expect <- structure(c(NA, -31L, 0L), origin = origin)
+  expect_identical(julian(x, origin = origin), expect)
+
+  expect_error(julian(new_ym(), origin = 1), "length 1 ym")
+  expect_error(julian(new_ym(), origin = new_ym(1:2)), "length 1 ym")
+  expect_error(julian(new_ym(), origin = new_ym(NA_integer_)), "length 1 ym")
+
+  expect_error(julian(new_ym(), origin = new_ym(1L), y = 1), class = "rlib_error_dots_nonempty")
+})
+
 # ------------------------------------------------------------------------------
 # lubridate
 
