@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • datea</title>
+<title>Parse a character vector as year month — ymon_parse • datea</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,18 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Parse a character vector as year month — ymon_parse" />
+<meta property="og:description" content="ymon_parse() is a parser for turning character input into ymon objects. The
+character method for as_ymon() is very strict, and only parses input of the
+form &quot;YYYY-MM&quot;, erroring on any failures. ymon_parse() is more flexible
+and will only issue a warning if parsing fails.
+Internally:
+&quot;-%d&quot; is appended to the format, and &quot;-01&quot; is appended to x.
+An attempt to parse as a Date is then made.
+The resulting Date is converted to ymon, with a warning if any input failed
+to parse. Failures result in NA.
+
+" />
 
 
 
@@ -58,7 +69,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -105,90 +116,55 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Parse a character vector as year month</h1>
+    <small class="dont-index">Source: <a href='https://github.com/DavisVaughan/datea/blob/master/R/ymon-parse.R'><code>R/ymon-parse.R</code></a></small>
+    <div class="hidden name"><code>ymon_parse.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p><code>ymon_parse()</code> is a parser for turning character input into ymon objects. The
+character method for <code><a href='as_ymon.html'>as_ymon()</a></code> is very strict, and only parses input of the
+form <code>"YYYY-MM"</code>, erroring on any failures. <code>ymon_parse()</code> is more flexible
+and will only issue a warning if parsing fails.</p>
+<p>Internally:</p><ul>
+<li><p><code>"-%d"</code> is appended to the <code>format</code>, and <code>"-01"</code> is appended to <code>x</code>.</p></li>
+<li><p>An attempt to parse as a Date is then made.</p></li>
+<li><p>The resulting Date is converted to ymon, with a warning if any input failed
+to parse. Failures result in <code>NA</code>.</p></li>
+</ul>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    </div>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="as_ymon.html">as_ymon()</a></code> </p>
-        </td>
-        <td><p>Coerce to year month</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="format.ymon.html">format(<i>&lt;ymon&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Format a ymon</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="is_ymon.html">is_ymon()</a></code> </p>
-        </td>
-        <td><p>Is <code>x</code> a ymon?</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="new_ymon.html">new_ymon()</a></code> </p>
-        </td>
-        <td><p>Construct a new year month</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="seq.ymon.html">seq(<i>&lt;ymon&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Sequence generation</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="vctrs-compat.html">vec_arith(<i>&lt;ymon&gt;</i>)</a></code> <code><a href="vctrs-compat.html">vec_cast(<i>&lt;ymon&gt;</i>)</a></code> <code><a href="vctrs-compat.html">vec_ptype2(<i>&lt;ymon&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>vctrs compatibility functions</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ymon-accessors.html">ymon_year()</a></code> <code><a href="ymon-accessors.html">ymon_month()</a></code> </p>
-        </td>
-        <td><p>Accessors</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ymon.html">ymon()</a></code> </p>
-        </td>
-        <td><p>Construct a new ymon</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ymon_parse.html">ymon_parse()</a></code> </p>
-        </td>
-        <td><p>Parse a character vector as year month</p></td>
-      </tr>
-    </tbody>
+    <pre class="usage"><span class='fu'>ymon_parse</span>(<span class='no'>x</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='st'>"%Y-%m"</span>)</pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p><code>[character]</code></p>
+<p>A character vector to coerce to ymon.</p></td>
+    </tr>
+    <tr>
+      <th>format</th>
+      <td><p><code>[character(1)]</code></p>
+<p>A format to parse character input with. Should generally only consist
+of format tokens related to year or month. Common formats are <code>"%Y-%m"</code>,
+<code>"%b %Y"</code>, and <code>"%Y %b"</code>.</p></td>
+    </tr>
     </table>
-  </div>
 
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>ymon_parse</span>(<span class='st'>"1970-01"</span>)</div><div class='output co'>#&gt; &lt;ymon[1]&gt;
+#&gt; [1] 1970-01</div><div class='input'><span class='fu'>ymon_parse</span>(<span class='st'>"1970 Jan"</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='st'>"%Y %b"</span>)</div><div class='output co'>#&gt; &lt;ymon[1]&gt;
+#&gt; [1] 1970-01</div><div class='input'>
+<span class='co'># Unparseable input results in `NA`, with a warning</span>
+<span class='fu'><a href='https://rdrr.io/r/base/try.html'>try</a></span>(<span class='fu'>ymon_parse</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"1970-00"</span>, <span class='st'>"1970-01"</span>)))</div><div class='output co'>#&gt; <span class='warning'>Warning: Unable to parse to ymon at location 1. Returning `NA` at that location.</span></div><div class='output co'>#&gt; &lt;ymon[2]&gt;
+#&gt; [1] NA      1970-01</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
