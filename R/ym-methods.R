@@ -24,7 +24,7 @@ months.ym <- function(x, abbreviate = FALSE) {
 }
 
 #' @export
-quarters.ym <- function(x) {
+quarters.ym <- function(x, ...) {
   out <- (months_to_month(x) - 1L) %/% 3L
   out <- paste0("Q", out + 1L)
   out[is.na(x)] <- NA_character_
