@@ -393,13 +393,13 @@ force_to_double_from_ym <- function(x) {
 # from a ym object, so it will never need truncation.
 as_utc_posixlt_from_date <- function(x) {
   x <- unclass(x)
-  x <- x * timeclass_global_seconds_in_day
-  out <- as.POSIXlt(x, tz = "UTC", origin = timeclass_global_origin_posixct)
+  x <- x * datea_global_seconds_in_day
+  out <- as.POSIXlt(x, tz = "UTC", origin = datea_global_origin_posixct)
   out
 }
 
 as_utc_posixct_from_date <- function(x) {
   x <- unclass(x)
-  x <- x * timeclass_global_seconds_in_day
+  x <- x * datea_global_seconds_in_day
   structure(x, tzone = "UTC", class = c("POSIXct", "POSIXt"))
 }

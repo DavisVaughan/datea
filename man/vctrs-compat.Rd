@@ -27,6 +27,6 @@
 See the corresponding vctrs function for the exact return value.
 }
 \description{
-These functions are the extensions that allow timeclass objects to
+These functions are the extensions that allow datea objects to
 work with vctrs.
 }

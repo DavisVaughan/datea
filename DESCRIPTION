@@ -1,4 +1,4 @@
-Package: timeclass
+Package: datea
 Title: Extended Date Classes
 Version: 0.0.0.9000
 Authors@R: 
@@ -10,8 +10,8 @@ Authors@R:
              role = "cph"))
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
-URL: https://github.com/DavisVaughan/timeclass
-BugReports: https://github.com/DavisVaughan/timeclass/issues
+URL: https://github.com/DavisVaughan/datea
+BugReports: https://github.com/DavisVaughan/datea/issues
 Imports:
     rlang,
     vctrs (>= 0.2.99.9011),

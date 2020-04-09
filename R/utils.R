@@ -1,11 +1,11 @@
 # ------------------------------------------------------------------------------
 # Persistent globals
 
-delayedAssign("timeclass_global_empty_ym", new_ym())
-delayedAssign("timeclass_global_empty_date", new_date())
-delayedAssign("timeclass_global_origin_date", new_date(0))
-delayedAssign("timeclass_global_origin_posixct", new_datetime(0, "UTC"))
-delayedAssign("timeclass_global_seconds_in_day", 86400)
+delayedAssign("datea_global_empty_ym", new_ym())
+delayedAssign("datea_global_empty_date", new_date())
+delayedAssign("datea_global_origin_date", new_date(0))
+delayedAssign("datea_global_origin_posixct", new_datetime(0, "UTC"))
+delayedAssign("datea_global_seconds_in_day", 86400)
 
 # ------------------------------------------------------------------------------
 

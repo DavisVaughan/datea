@@ -1,14 +1,14 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# timeclass
+# datea
 
 <!-- badges: start -->
 
 [![R build
-status](https://github.com/DavisVaughan/timeclass/workflows/R-CMD-check/badge.svg)](https://github.com/DavisVaughan/timeclass/actions)
+status](https://github.com/DavisVaughan/datea/workflows/R-CMD-check/badge.svg)](https://github.com/DavisVaughan/datea/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/DavisVaughan/timeclass/branch/master/graph/badge.svg)](https://codecov.io/gh/DavisVaughan/timeclass?branch=master)
+coverage](https://codecov.io/gh/DavisVaughan/datea/branch/master/graph/badge.svg)](https://codecov.io/gh/DavisVaughan/datea?branch=master)
 <!-- badges: end -->
 
 Additional time-related S3 classes for R.
@@ -20,5 +20,5 @@ You can install the development version from
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("DavisVaughan/timeclass")
+remotes::install_github("DavisVaughan/datea")
 ```

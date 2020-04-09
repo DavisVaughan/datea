@@ -33,7 +33,7 @@ static SEXP months_to_days(SEXP x) {
 }
 
 // [[ export() ]]
-SEXP timeclass_months_to_days(SEXP x) {
+SEXP datea_months_to_days(SEXP x) {
   return months_to_days(x);
 }
 
@@ -78,7 +78,7 @@ static SEXP months_to_year_month(SEXP x) {
 }
 
 // [[ export() ]]
-SEXP timeclass_months_to_year_month(SEXP x) {
+SEXP datea_months_to_year_month(SEXP x) {
   return months_to_year_month(x);
 }
 
@@ -112,7 +112,7 @@ static SEXP months_to_year(SEXP x) {
 }
 
 // [[ export() ]]
-SEXP timeclass_months_to_year(SEXP x) {
+SEXP datea_months_to_year(SEXP x) {
   return months_to_year(x);
 }
 
@@ -146,7 +146,7 @@ static SEXP months_to_month(SEXP x) {
 }
 
 // [[ export() ]]
-SEXP timeclass_months_to_month(SEXP x) {
+SEXP datea_months_to_month(SEXP x) {
   return months_to_month(x);
 }
 

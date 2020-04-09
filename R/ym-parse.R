@@ -53,7 +53,7 @@ ym_parse <- function(x, format = "%Y-%m") {
   format <- paste0(format, "-%d")
   out <- paste0(x, "-01")
 
-  out <- as.Date(out, format = format, origin = timeclass_global_origin_date)
+  out <- as.Date(out, format = format, origin = datea_global_origin_date)
   out <- force_to_ym_from_date(out)
 
   new_na_detected <- is.na(out) & !is.na(x)

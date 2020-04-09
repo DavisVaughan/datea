@@ -7,6 +7,6 @@
 #' @import vctrs
 #' @import rlang
 #' @importFrom warp warp_distance
-#' @useDynLib timeclass, .registration = TRUE
+#' @useDynLib datea, .registration = TRUE
 ## usethis namespace: end
 NULL

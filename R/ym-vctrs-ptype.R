@@ -1,6 +1,6 @@
 #' vctrs compatibility functions
 #'
-#' These functions are the extensions that allow timeclass objects to
+#' These functions are the extensions that allow datea objects to
 #' work with vctrs.
 #'
 #' @param x,y Objects.
@@ -28,7 +28,7 @@ vec_ptype2.ym <- function(x, y, ...) {
 #' @method vec_ptype2.ym ym
 #' @export
 vec_ptype2.ym.ym <- function(x, y, ..., x_arg = "", y_arg = "") {
-  timeclass_global_empty_ym
+  datea_global_empty_ym
 }
 
 # ------------------------------------------------------------------------------
@@ -36,13 +36,13 @@ vec_ptype2.ym.ym <- function(x, y, ..., x_arg = "", y_arg = "") {
 #' @method vec_ptype2.ym Date
 #' @export
 vec_ptype2.ym.Date <- function(x, y, ..., x_arg = "", y_arg = "") {
-  timeclass_global_empty_date
+  datea_global_empty_date
 }
 
 #' @method vec_ptype2.Date ym
 #' @export
 vec_ptype2.Date.ym <- function(x, y, ..., x_arg = "", y_arg = "") {
-  timeclass_global_empty_date
+  datea_global_empty_date
 }
 
 # ------------------------------------------------------------------------------

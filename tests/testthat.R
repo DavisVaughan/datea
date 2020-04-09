@@ -1,4 +1,4 @@
 library(testthat)
-library(timeclass)
+library(datea)
 
-test_check("timeclass")
+test_check("datea")
