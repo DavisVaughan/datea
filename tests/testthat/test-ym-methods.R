@@ -53,3 +53,12 @@ test_that("`[` works", {
 test_that("`[` has nice error message with extra indices", {
   expect_error(new_ym(1L)[1, 1], class = "rlib_error_dots_nonempty")
 })
+
+test_that("`[[` works", {
+  x <- new_ym(1:2)
+  expect_identical(x[[1]], new_ym(1L))
+
+  # names are dropped
+  x <- set_names(x, c("x", "y"))
+  expect_identical(x[["y"]], new_ym(2L))
+})
