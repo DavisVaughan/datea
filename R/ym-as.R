@@ -33,6 +33,8 @@ as_ym <- function(x, ...) {
   UseMethod("as_ym")
 }
 
+# ------------------------------------------------------------------------------
+
 #' @export
 as_ym.default <- function(x, ...) {
   ellipsis::check_dots_empty()
@@ -40,11 +42,15 @@ as_ym.default <- function(x, ...) {
   abort(paste0("Can't convert a <", class, "> to a <ym>."))
 }
 
+# ------------------------------------------------------------------------------
+
 #' @export
 as_ym.ym <- function(x, ...) {
   ellipsis::check_dots_empty()
   x
 }
+
+# ------------------------------------------------------------------------------
 
 #' @rdname as_ym
 #' @export
@@ -60,6 +66,8 @@ force_to_ym_from_date <- function(x) {
   names(out) <- names(x)
   out
 }
+
+# ------------------------------------------------------------------------------
 
 #' @rdname as_ym
 #' @export
@@ -80,6 +88,8 @@ force_to_ym_from_posixt <- function(x) {
   out
 }
 
+# ------------------------------------------------------------------------------
+
 #' @rdname as_ym
 #' @export
 as_ym.POSIXlt <- function(x, ...) {
@@ -97,6 +107,8 @@ force_to_ym_from_posixlt <- function(x) {
   out
 }
 
+# ------------------------------------------------------------------------------
+
 #' @rdname as_ym
 #' @export
 as_ym.integer <- function(x, ...) {
@@ -107,6 +119,8 @@ as_ym.integer <- function(x, ...) {
 force_to_ym_from_integer <- function(x) {
   new_ym(x)
 }
+
+# ------------------------------------------------------------------------------
 
 #' @rdname as_ym
 #' @export
@@ -124,6 +138,8 @@ force_to_ym_from_double <- function(x) {
 
   out
 }
+
+# ------------------------------------------------------------------------------
 
 #' @rdname as_ym
 #' @export
