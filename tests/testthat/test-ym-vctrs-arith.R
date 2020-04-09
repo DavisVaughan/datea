@@ -9,7 +9,17 @@ test_that("default method throws errors", {
 # ------------------------------------------------------------------------------
 # ym - ym
 
-test_that("throws errors", {
+test_that("subtraction returns the number of months between", {
+  expect_identical(new_ym(1L) - new_ym(0L), 1L)
+})
+
+test_that("tidy recycling rules", {
+  expect_identical(new_ym(c(1L, 2L)) - new_ym(1L), c(0L, 1L))
+  expect_identical(new_ym(1L) - new_ym(), integer())
+  expect_error(new_ym(1:2) - new_ym(1:3), class = "vctrs_error_incompatible_size")
+})
+
+test_that("everything else throws errors", {
   expect_error(vec_arith("+", new_ym(), new_ym()), class = "vctrs_error_incompatible_op")
 })
 

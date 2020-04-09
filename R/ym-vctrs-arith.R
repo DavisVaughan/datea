@@ -14,6 +14,25 @@ vec_arith.ym.default <- function(op, x, y, ...) {
 
 # ------------------------------------------------------------------------------
 
+#' @method vec_arith.ym ym
+#' @export
+vec_arith.ym.ym <- function(op, x, y, ...) {
+  check_tidy_recyclable(x, y)
+
+  switch(
+    op,
+    "-" = minus_ym_ym(x, y),
+    stop_incompatible_op(op, x, y)
+  )
+}
+
+# Return the number of months between `x` and `y`
+minus_ym_ym <- function(x, y) {
+  unclass(x) - unclass(y)
+}
+
+# ------------------------------------------------------------------------------
+
 #' @method vec_arith.ym MISSING
 #' @export
 vec_arith.ym.MISSING <- function(op, x, y, ...) {
