@@ -18,7 +18,10 @@ of format tokens related to year or month. Common formats are \code{"\%Y-\%m"},
 \code{"\%b \%Y"}, and \code{"\%Y \%b"}.}
 }
 \description{
-\code{ym_parse()} is a parser for turning character input into ym objects.
+\code{ym_parse()} is a parser for turning character input into ym objects. The
+character method for \code{as_ym()} is very strict, and only parses input of the
+form \code{"YYYY-MM"}, erroring on any failures. \code{ym_parse()} is more flexible
+and will only issue a warning if parsing fails.
 
 Internally:
 \itemize{

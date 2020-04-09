@@ -132,8 +132,95 @@ as_ym.character <- function(x, ...) {
   force_to_ym_from_character(x)
 }
 
+# Strict parsing of character to ym, expecting only the
+# form YYYY-MM. Intended to roundtrip `as.character.ym()`.
+# Use `ym_parse()` for more flexible handling.
 force_to_ym_from_character <- function(x) {
-  ym_parse(x)
+  na <- is.na(x)
+
+  # Check for a dash
+  has_dash_or_na <- grepl("-", x) | na
+  missing_dash_and_not_na <- !has_dash_or_na
+
+  if (any(missing_dash_and_not_na)) {
+    locations <- which(missing_dash_and_not_na)
+    stop_lossy_parse(locations, "Input must have a dash separator.")
+  }
+
+  split <- strsplit(x, "-", fixed = TRUE)
+
+  # Check that there was only a single dash.
+  # Total lengths should be `2 * length(x) - sum(na)`.
+  lengths <- lengths(split, use.names = FALSE)
+  real_length <- sum(lengths)
+  expected_length <- 2L * length(x) - sum(na)
+
+  if (real_length != expected_length) {
+    ok <- map_lgl(split, function(x) length(x) == 2)
+    ok <- ok | na
+    locations <- which(!ok)
+    stop_lossy_parse(locations, "Input must only have one dash separator.")
+  }
+
+  # Replace NA splits with c(NA, NA) to make extraction simpler
+  split[na] <- list(c(NA_character_, NA_character_))
+
+  chr_year <- map_chr(split, `[[`, i = 1L)
+  chr_month <- map_chr(split, `[[`, i = 2L)
+
+  # Go through double, then to integer to catch things like `2019.5-01`
+  year <- suppressWarnings(as.double(chr_year))
+  month <- suppressWarnings(as.double(chr_month))
+
+  # Catch what can't be parsed as double
+  not_ok <- is.na(year) | is.na(month)
+  not_ok <- not_ok & !na
+
+  if (any(not_ok)) {
+    locations <- which(not_ok)
+    stop_lossy_parse(locations, "Year and month components must be integers.")
+  }
+
+  # Finally cast double to integer
+  year <- vec_cast(year, integer(), x_arg = "year")
+  month <- vec_cast(month, integer(), x_arg = "month")
+
+  out <- ym(year, month)
+  names(out) <- names(x)
+
+  out
+}
+
+stop_lossy_parse <- function(locations, bullet = NULL) {
+  if (length(locations) > 5) {
+    locations <- c(locations[1:5], "etc.")
+    full_stop <- ""
+  } else {
+    full_stop <- "."
+  }
+
+  if (length(locations) == 1L) {
+    chr_location <- "location"
+  } else {
+    chr_location <- "locations"
+  }
+
+  locations <- paste0(locations, collapse = ", ")
+
+  message <- paste0(
+    "Unable to parse to yearmonth at ",
+    chr_location,
+    " ",
+    locations,
+    full_stop
+  )
+
+  if (!is.null(bullet)) {
+    bullet <- format_error_bullets(c(x = bullet))
+    message <- paste(c(message, bullet), collapse = "\n")
+  }
+
+  abort(message)
 }
 
 # ------------------------------------------------------------------------------

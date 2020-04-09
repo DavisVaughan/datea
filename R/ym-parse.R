@@ -1,7 +1,10 @@
 #' Parse a character vector as year month
 #'
 #' @description
-#' `ym_parse()` is a parser for turning character input into ym objects.
+#' `ym_parse()` is a parser for turning character input into ym objects. The
+#' character method for `as_ym()` is very strict, and only parses input of the
+#' form `"YYYY-MM"`, erroring on any failures. `ym_parse()` is more flexible
+#' and will only issue a warning if parsing fails.
 #'
 #' Internally:
 #'

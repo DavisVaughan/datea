@@ -5,3 +5,66 @@ default method collapses classes
 > as_ym(ordered(factor("x")))
 Error: Can't convert a <ordered/factor> to a <ym>.
 
+
+must have a dash
+================
+
+> as_ym("11")
+Error: Unable to parse to yearmonth at location 1.
+x Input must have a dash separator.
+
+
+can only have 1 dash
+====================
+
+> as_ym("2019-01-01")
+Error: Unable to parse to yearmonth at location 1.
+x Input must only have one dash separator.
+
+
+catches non-parsable year/month components
+==========================================
+
+> as_ym("foo-01")
+Error: Unable to parse to yearmonth at location 1.
+x Year and month components must be integers.
+
+> as_ym("1970-foo")
+Error: Unable to parse to yearmonth at location 1.
+x Year and month components must be integers.
+
+> as_ym("NA-01")
+Error: Unable to parse to yearmonth at location 1.
+x Year and month components must be integers.
+
+> as_ym("1970-NA")
+Error: Unable to parse to yearmonth at location 1.
+x Year and month components must be integers.
+
+
+fractional double can't be converted
+====================================
+
+> as_ym("2019.5-01")
+Error: Can't convert from `year` <double> to <integer> due to loss of precision.
+* Locations: 1
+
+
+OOB months are caught
+=====================
+
+> as_ym("2019-13")
+Error: `month` values must be between `1` and `12`.
+
+
+multiple failures are truncated nicely
+======================================
+
+> as_ym(rep("x", 5))
+Error: Unable to parse to yearmonth at locations 1, 2, 3, 4, 5.
+x Input must have a dash separator.
+
+> as_ym(rep("x", 20))
+Error: Unable to parse to yearmonth at locations 1, 2, 3, 4, 5, etc.
+x Input must have a dash separator.
+
