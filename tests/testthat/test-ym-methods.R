@@ -1,23 +1,5 @@
 # ------------------------------------------------------------------------------
-# lubridate
-
-test_that("lubridate::tz() returns UTC", {
-  expect_identical(lubridate::tz(new_ym(1L)), "UTC")
-})
-
-test_that("lubridate accessors work", {
-  x <- new_ym(0L)
-
-  expect_identical(lubridate::year(x), 1970)
-  expect_identical(lubridate::month(x), 1)
-  expect_identical(lubridate::day(x), 1L)
-  expect_identical(lubridate::hour(x), 0L)
-  expect_identical(lubridate::minute(x), 0L)
-  expect_identical(lubridate::second(x), 0)
-})
-
-# ------------------------------------------------------------------------------
-# vctrs backed methods
+# Base
 
 test_that("as.list() works", {
   x <- set_names(new_ym(1:2), c("x", "y"))
@@ -36,10 +18,6 @@ test_that("c() works as best as it can", {
   # Nothing we can do about the second case
   expect_error(c(new_ym(1L), 1), class = "vctrs_error_incompatible_type")
   expect_identical(c(1, new_ym(1L)), c(1, 1))
-})
-
-test_that("vec_c() works correctly where c() fails", {
-  expect_error(vec_c(1, new_ym(1L)), class = "vctrs_error_incompatible_type")
 })
 
 test_that("`[` works", {
@@ -61,6 +39,31 @@ test_that("`[[` works", {
   # names are dropped
   x <- set_names(x, c("x", "y"))
   expect_identical(x[["y"]], new_ym(2L))
+})
+
+# ------------------------------------------------------------------------------
+# lubridate
+
+test_that("lubridate::tz() returns UTC", {
+  expect_identical(lubridate::tz(new_ym(1L)), "UTC")
+})
+
+test_that("lubridate accessors work", {
+  x <- new_ym(0L)
+
+  expect_identical(lubridate::year(x), 1970)
+  expect_identical(lubridate::month(x), 1)
+  expect_identical(lubridate::day(x), 1L)
+  expect_identical(lubridate::hour(x), 0L)
+  expect_identical(lubridate::minute(x), 0L)
+  expect_identical(lubridate::second(x), 0)
+})
+
+# ------------------------------------------------------------------------------
+# vctrs
+
+test_that("vec_c() works correctly where c() fails", {
+  expect_error(vec_c(1, new_ym(1L)), class = "vctrs_error_incompatible_type")
 })
 
 test_that("vec_proxy() returns input", {

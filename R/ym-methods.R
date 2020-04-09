@@ -1,8 +1,5 @@
-
-# Registered in .onLoad()
-tz.ym <- function(x) {
-  "UTC"
-}
+# ------------------------------------------------------------------------------
+# Base
 
 # Only implemented to have better handling of extra indices passed in `...`
 #' @export
@@ -16,6 +13,16 @@ tz.ym <- function(x) {
   vec_slice(x, i)
 }
 
+# ------------------------------------------------------------------------------
+# lubridate
+
+# Registered in .onLoad()
+tz.ym <- function(x) {
+  "UTC"
+}
+
+# ------------------------------------------------------------------------------
+# vctrs
 
 # Slightly faster than `vec_proxy.vctrs_vctr` since we know it isn't a list
 #' @export
