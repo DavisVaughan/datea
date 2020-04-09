@@ -1,0 +1,10 @@
+
+accessors errors on non-ymon objects
+====================================
+
+> ymon_year(1)
+Error: `x` must be a <ymon>, not a <numeric>.
+
+> ymon_month(1)
+Error: `x` must be a <ymon>, not a <numeric>.
+

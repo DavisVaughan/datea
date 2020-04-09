@@ -1,7 +1,7 @@
 # ------------------------------------------------------------------------------
 # Persistent globals
 
-delayedAssign("datea_global_empty_ym", new_ym())
+delayedAssign("datea_global_empty_ymon", new_ymon())
 delayedAssign("datea_global_empty_date", new_date())
 delayedAssign("datea_global_origin_date", new_date(0))
 delayedAssign("datea_global_origin_posixct", new_datetime(0, "UTC"))
@@ -36,7 +36,7 @@ glubort <- function(..., .sep = "", .envir = parent.frame()) {
   abort(glue::glue(..., .sep = .sep, .envir = .envir))
 }
 
-stop_requires_ym <- function(x) {
+stop_requires_ymon <- function(x) {
   class <- class_collapse(x)
-  glubort("`x` must be a <ym>, not a <{class}>.")
+  glubort("`x` must be a <ymon>, not a <{class}>.")
 }

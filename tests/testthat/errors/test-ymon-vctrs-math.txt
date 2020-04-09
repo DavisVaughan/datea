@@ -1,0 +1,133 @@
+> x <- new_ymon(1L)
+
+Summary methods are not available
+=================================
+
+> prod(x)
+Error: `prod()` is not supported for <ymon>.
+
+> sum(x)
+Error: `sum()` is not supported for <ymon>.
+
+> any(x)
+Error: `any()` is not supported for <ymon>.
+
+> all(x)
+Error: `all()` is not supported for <ymon>.
+
+
+Math methods are not available
+==============================
+
+> abs(x)
+Error: `abs()` is not supported for <ymon>.
+
+> sign(x)
+Error: `sign()` is not supported for <ymon>.
+
+> sqrt(x)
+Error: `sqrt()` is not supported for <ymon>.
+
+> ceiling(x)
+Error: `ceiling()` is not supported for <ymon>.
+
+> floor(x)
+Error: `floor()` is not supported for <ymon>.
+
+> trunc(x)
+Error: `trunc()` is not supported for <ymon>.
+
+> cummax(x)
+Error: `cummax()` is not supported for <ymon>.
+
+> cummin(x)
+Error: `cummin()` is not supported for <ymon>.
+
+> cumprod(x)
+Error: `cumprod()` is not supported for <ymon>.
+
+> cumsum(x)
+Error: `cumsum()` is not supported for <ymon>.
+
+> log(x)
+Error: `log()` is not supported for <ymon>.
+
+> log10(x)
+Error: `log10()` is not supported for <ymon>.
+
+> log2(x)
+Error: `log2()` is not supported for <ymon>.
+
+> log1p(x)
+Error: `log1p()` is not supported for <ymon>.
+
+> acos(x)
+Error: `acos()` is not supported for <ymon>.
+
+> acosh(x)
+Error: `acosh()` is not supported for <ymon>.
+
+> asin(x)
+Error: `asin()` is not supported for <ymon>.
+
+> asinh(x)
+Error: `asinh()` is not supported for <ymon>.
+
+> atan(x)
+Error: `atan()` is not supported for <ymon>.
+
+> atanh(x)
+Error: `atanh()` is not supported for <ymon>.
+
+> exp(x)
+Error: `exp()` is not supported for <ymon>.
+
+> expm1(x)
+Error: `expm1()` is not supported for <ymon>.
+
+> cos(x)
+Error: `cos()` is not supported for <ymon>.
+
+> cosh(x)
+Error: `cosh()` is not supported for <ymon>.
+
+> cospi(x)
+Error: `cospi()` is not supported for <ymon>.
+
+> sin(x)
+Error: `sin()` is not supported for <ymon>.
+
+> sinh(x)
+Error: `sinh()` is not supported for <ymon>.
+
+> sinpi(x)
+Error: `sinpi()` is not supported for <ymon>.
+
+> tan(x)
+Error: `tan()` is not supported for <ymon>.
+
+> tanh(x)
+Error: `tanh()` is not supported for <ymon>.
+
+> tanpi(x)
+Error: `tanpi()` is not supported for <ymon>.
+
+> gamma(x)
+Error: `gamma()` is not supported for <ymon>.
+
+> lgamma(x)
+Error: `lgamma()` is not supported for <ymon>.
+
+> digamma(x)
+Error: `digamma()` is not supported for <ymon>.
+
+> trigamma(x)
+Error: `trigamma()` is not supported for <ymon>.
+
+
+mean() generic is not supported
+===============================
+
+> mean(x)
+Error: `mean()` is not supported for <ymon>.
+

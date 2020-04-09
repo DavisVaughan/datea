@@ -1,3 +1,3 @@
 .onLoad <- function(libname, pkgname) {
-  vctrs::s3_register("lubridate::tz", "ym")
+  vctrs::s3_register("lubridate::tz", "ymon")
 }

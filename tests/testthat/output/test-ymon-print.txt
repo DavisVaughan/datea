@@ -1,0 +1,48 @@
+
+zero length
+===========
+
+> new_ymon()
+<ymon[0]>
+
+
+numbers are not quoted
+======================
+
+> new_ymon(c(0L, 1L))
+<ymon[2]>
+[1] 1970-01 1970-02
+
+
+NA values don't print like <NA>
+===============================
+
+> new_ymon(NA_integer_)
+<ymon[1]>
+[1] NA
+
+
+years 0 < x < 1000 print with 4 digits, left pad with zeros
+===========================================================
+
+> ymon(1, 1)
+<ymon[1]>
+[1] 0001-01
+
+> ymon(10, 1)
+<ymon[1]>
+[1] 0010-01
+
+> ymon(100, 1)
+<ymon[1]>
+[1] 0100-01
+
+
+names are printed
+=================
+
+> set_names(new_ymon(0L), "x")
+<ymon[1]>
+      x 
+1970-01 
+
