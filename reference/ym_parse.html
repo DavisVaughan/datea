@@ -40,7 +40,10 @@
 
 
 <meta property="og:title" content="Parse a character vector as year month — ym_parse" />
-<meta property="og:description" content="ym_parse() is a parser for turning character input into ym objects.
+<meta property="og:description" content="ym_parse() is a parser for turning character input into ym objects. The
+character method for as_ym() is very strict, and only parses input of the
+form &quot;YYYY-MM&quot;, erroring on any failures. ym_parse() is more flexible
+and will only issue a warning if parsing fails.
 Internally:
 &quot;-%d&quot; is appended to the format, and &quot;-01&quot; is appended to x.
 An attempt to parse as a Date is then made.
@@ -121,7 +124,10 @@ to parse. Failures result in NA.
     </div>
 
     <div class="ref-description">
-    <p><code>ym_parse()</code> is a parser for turning character input into ym objects.</p>
+    <p><code>ym_parse()</code> is a parser for turning character input into ym objects. The
+character method for <code><a href='as_ym.html'>as_ym()</a></code> is very strict, and only parses input of the
+form <code>"YYYY-MM"</code>, erroring on any failures. <code>ym_parse()</code> is more flexible
+and will only issue a warning if parsing fails.</p>
 <p>Internally:</p><ul>
 <li><p><code>"-%d"</code> is appended to the <code>format</code>, and <code>"-01"</code> is appended to <code>x</code>.</p></li>
 <li><p>An attempt to parse as a Date is then made.</p></li>
