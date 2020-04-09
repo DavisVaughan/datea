@@ -62,3 +62,7 @@ test_that("`[[` works", {
   x <- set_names(x, c("x", "y"))
   expect_identical(x[["y"]], new_ym(2L))
 })
+
+test_that("vec_proxy() returns input", {
+  expect_identical(vec_proxy(new_ym(1:5)), new_ym(1:5))
+})

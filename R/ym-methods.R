@@ -15,3 +15,10 @@ tz.ym <- function(x) {
 
   vec_slice(x, i)
 }
+
+
+# Slightly faster than `vec_proxy.vctrs_vctr` since we know it isn't a list
+#' @export
+vec_proxy.ym <- function(x, ...) {
+  x
+}
